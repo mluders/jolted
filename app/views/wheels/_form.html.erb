@@ -1,0 +1,10 @@
+<%= @wheel.inspect %>
+<%= @wheel.wheel_segments.size %>
+
+<%= form_for @wheel, url: wheel_path, local: true do |f| %>
+  <%= f.fields_for :wheel_segments do |s| %>
+    <%= s.text_field :label, placeholder: 'Label' %>
+  <% end %>
+
+  <%= f.submit 'Save' %>
+<% end %>
