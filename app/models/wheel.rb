@@ -1,15 +1,19 @@
 class Wheel < ApplicationRecord
-  MIN_SLICES = 10
+  MIN_SEGMENTS = 10
 
   belongs_to :shop
-  has_many :wheel_slices
-  accepts_nested_attributes_for :wheel_slices
+  has_many :wheel_segments, dependent: :destroy
+  accepts_nested_attributes_for :wheel_segments
 
-  validate :min_slices
+  validate :min_segments
+
+  def random_segment_index
+    rand(0...MIN_SEGMENTS)
+  end
 
   private
 
-  def min_slices
-    errors.add(:wheel_slices, "must exist (at least #{MIN_SLICES}") if wheel_slices.size < MIN_SLICES
+  def min_segments
+    errors.add(:wheel_segments, "must exist (at least #{MIN_SEGMENTS}") if wheel_segments.size < MIN_SEGMENTS
   end
 end

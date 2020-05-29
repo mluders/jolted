@@ -10,11 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_23_165219) do
+ActiveRecord::Schema.define(version: 2020_05_29_223824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "discount_codes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "wheel_id", null: false
+    t.string "email", null: false
+    t.string "code", null: false
+    t.datetime "expires_at", null: false
+    t.string "shopify_price_rule_id", null: false
+    t.string "shopify_discount_code_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["wheel_id", "email"], name: "index_discount_codes_on_wheel_id_and_email"
+    t.index ["wheel_id"], name: "index_discount_codes_on_wheel_id"
+  end
 
   create_table "shops", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "shopify_domain", null: false
@@ -24,12 +37,12 @@ ActiveRecord::Schema.define(version: 2020_05_23_165219) do
     t.index ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true
   end
 
-  create_table "wheel_slices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "wheel_segments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "wheel_id", null: false
-    t.string "label"
+    t.string "label", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["wheel_id"], name: "index_wheel_slices_on_wheel_id"
+    t.index ["wheel_id"], name: "index_wheel_segments_on_wheel_id"
   end
 
   create_table "wheels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
