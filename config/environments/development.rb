@@ -1,6 +1,7 @@
 Rails.application.configure do
   config.hosts = (config.hosts rescue []) << /\h+.ngrok.io/
   config.hosts << 'joltify.ngrok.io'
+  config.hosts << 'the-ninja-outlet.myshopify.com'
 
   # Settings specified here will take precedence over those in config/application.rb.
 

@@ -1,0 +1,14 @@
+function openNav() {
+  document.getElementById('main-joltify-popup').style.width = "100%";
+}
+
+function closeNav() {
+  document.getElementById('main-joltify-popup').style.width = "0%";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const popup = document.createElement('div');
+  popup.innerHTML = `<%= render 'popup' %>`;
+  document.body.insertBefore(popup, document.body.firstChild);
+  openNav();
+});

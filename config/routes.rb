@@ -3,4 +3,10 @@ Rails.application.routes.draw do
   mount ShopifyApp::Engine, at: '/'
 
   resource :wheel
+
+  namespace :proxy do
+    resource :wheel, only: [:show]
+    resource :snippet, only: [:show]
+    resource :frame, only: [:show]
+  end
 end
