@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resource :wheel
 
   namespace :proxy do
-    resource :wheel, only: [:create]
+    resources :wheels, only: [:create]
     resource :snippet, only: [:show]
     resource :frame, only: [:show]
   end
