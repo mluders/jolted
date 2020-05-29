@@ -1,4 +1,48 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+<style>
+  .container {
+    height: 100%;
+  }
 
-Hello
+  .wheel-canvas {
+    position: fixed;
+    height: 100%;
+  }
+
+  .info-container {
+    position:fixed;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 0;
+    padding: 3em;
+  }
+</style>
+
+<%= render 'wheel' %>
+
+<div class="info-container">
+  <form>
+    <h1>Spin the wheel.</h1>
+    <p>Win an exclusive coupon code to our shop.</p>
+    <div class="form-group">
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Please enter your email">
+    </div>
+    <button type="submit" class="btn btn-primary" id="spin-button">Try your luck</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById('spin-button').addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log('hello');
+    const wheel = document.joltify_wheel;
+    let stopAt = wheel.getRandomForSegment(4);
+    wheel.animation.stopAngle = stopAt;
+    wheel.startAnimation();
+  });
+</script>
+
