@@ -5,11 +5,11 @@ module Proxy
     def create
       email = params.require(:email)
       wheel = Wheel.first
-      slice_index = wheel.random_slice_index
-      slice = wheel.wheel_slices[slice_index]
-      discount_code = DiscountCodeService.create_discount_code(wheel_slice: slice, email: email)
+      segment_index = wheel.random_segment_index
+      segment = wheel.wheel_segments[segment_index]
+      discount_code = DiscountCodeService.create_discount_code(wheel_segment: segment, email: email)
 
-      render json: { prize: discount_code, slice_index: slice_index }, status: :created
+      render json: { prize: discount_code.code, segment_index: segment_index }, status: :created
     end
   end
 end

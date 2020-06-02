@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class Wheel extends React.Component {
   static propTypes = {
+    wheelData: PropTypes.object.isRequired,
     onCreateWheel: PropTypes.func.isRequired,
     afterSpinWheel: PropTypes.func.isRequired
   }
@@ -11,29 +12,24 @@ export default class Wheel extends React.Component {
     this.createWheel();
   }
 
+  generateSegments = () => {
+    const { segments } = this.props.wheelData;
+
+    return segments.map((s) => {
+      return ({ 'fillStyle' : '#eae56f', 'text' : s.label });
+    });
+  }
+
   createWheel = () => {
     const wheel = new Winwheel({
       'canvasId'     : 'wheel-canvas',
       'centerX'      : 30,
-      'numSegments'  : 10,         // Number of segments
-      'outerRadius'  : 212,       // The size of the wheel.
-      'textFontSize' : 15,        // Font size.
+      'numSegments'  : 10,
+      'outerRadius'  : 212,
+      'textFontSize' : 15,
       'lineWidth'    : 0.001,
-  
-      'segments'     :            // Definition of all the segments.
-      [
-        {'fillStyle' : '#eae56f', 'text' : 'Prize 1'},
-        {'fillStyle' : '#89f26e', 'text' : 'Prize 2'},
-        {'fillStyle' : '#7de6ef', 'text' : 'Prize 3'},
-        {'fillStyle' : '#e7706f', 'text' : 'Prize 4'},
-        {'fillStyle' : '#eae56f', 'text' : 'Prize 5'},
-        {'fillStyle' : '#89f26e', 'text' : 'Prize 6'},
-        {'fillStyle' : '#7de6ef', 'text' : 'Prize 7'},
-        {'fillStyle' : '#e7706f', 'text' : 'Prize 8'},
-        {'fillStyle' : '#7de6ef', 'text' : 'Prize 9'},
-        {'fillStyle' : '#e7706f', 'text' : 'Prize 10'}
-      ],
-      'animation' :               // Definition of the animation
+      'segments'     : this.generateSegments(),
+      'animation'    :
       {
         'type'     : 'spinToStop',
         'duration' : 5,

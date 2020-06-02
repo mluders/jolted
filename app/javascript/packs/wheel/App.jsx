@@ -1,33 +1,56 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import Form from './Form';
 import Prize from './Prize';
 import Spinner from './Spinner';
 import Wheel from './Wheel';
 
-const WHEEL_URL = '/proxy/wheels'
-
 export default class App extends React.Component {
+  static propTypes = {
+    shopId: PropTypes.string.isRequired,
+  }
+
   constructor(props) {
     super(props);
 
     this.state = {
-      isFetchingPrize: false,
+      wheelData: null,
       wheel: null,
-      wheelHasSpun: false,
-      prize: null
+      prize: null,
+      isFetchingPrize: false,
+      wheelHasSpun: false
     }
+
+    this.fetchWheelData();
   }
 
-  onFormSubmit = (email) => {
+  discountCodeURL = () => {
+    const { shopId } = this.props;
+    return `/proxy/shops/${shopId}/discount_codes`
+  }
+
+  wheelURL = () => {
+    const { shopId } = this.props;
+    return `/proxy/shops/${shopId}/wheel`
+  }
+
+  fetchWheelData = async () => {
+    const url = this.wheelURL();
+
+    const response = await fetch(url);
+    const { wheel } = await response.json();
+
     this.setState({
       ...this.state,
-      isFetchingPrize: true,
-    }, () => this.fetchPrize(email))
-  };
+      wheelData: wheel
+    });
+  }
 
   fetchPrize = async (email) => {
-    const data = { email }
-    const response = await fetch(WHEEL_URL, {
+    const data = { email };
+    const url = this.discountCodeURL();
+
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -35,13 +58,13 @@ export default class App extends React.Component {
       body: JSON.stringify(data)
     });
 
-    const { prize, segment } = await response.json();
+    const { prize, segment_index: segmentIndex } = await response.json();
 
     this.setState({
       ...this.state,
       isFetchingPrize: false,
       prize: prize
-    }, () => this.spinWheel(segment));
+    }, () => this.spinWheel(segmentIndex));
   };
 
   spinWheel = (segment) => {
@@ -49,6 +72,13 @@ export default class App extends React.Component {
     let stopAt = wheel.getRandomForSegment(segment);
     wheel.animation.stopAngle = stopAt;
     wheel.startAnimation();
+  };
+
+  onFormSubmit = (email) => {
+    this.setState({
+      ...this.state,
+      isFetchingPrize: true,
+    }, () => this.fetchPrize(email))
   };
 
   onCreateWheel = (wheel) => {
@@ -66,8 +96,9 @@ export default class App extends React.Component {
   };
 
   currentFormComponent = () => {
-    const { isFetchingPrize, wheelHasSpun, prize } = this.state;
+    const { wheelData, prize, isFetchingPrize, wheelHasSpun } = this.state;
 
+    if (!wheelData) return <Spinner />;
     if (isFetchingPrize) return <Spinner />;
     if (prize && wheelHasSpun) return <Prize prize={prize} />
     if (prize) return null;
@@ -81,14 +112,20 @@ export default class App extends React.Component {
   }
 
   render() {
+    const { wheelData } = this.state;
+
     return (
       <div>
         {this.currentFormComponent()}
 
-        <Wheel
-          onCreateWheel={this.onCreateWheel}
-          afterSpinWheel={this.afterSpinWheel}
-        />
+        {
+          wheelData &&
+          <Wheel
+            wheelData={wheelData}
+            onCreateWheel={this.onCreateWheel}
+            afterSpinWheel={this.afterSpinWheel}
+          />
+        }
       </div>
     );
   }

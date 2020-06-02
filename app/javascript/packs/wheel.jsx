@@ -3,8 +3,12 @@ import ReactDOM from 'react-dom'
 import App from './wheel/App'
 
 document.addEventListener('DOMContentLoaded', () => {
+  const packData = document.getElementById('pack-data');
+  console.log(packData);
+  const { shopId } = packData.dataset;
+
   ReactDOM.render(
-    <App />,
+    <App shopId={shopId} />,
     document.body.appendChild(document.createElement('div')),
   )
 });
