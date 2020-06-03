@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class WheelSliceTest < ActiveSupport::TestCase
+class WheelSegmentTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
