@@ -1,14 +1,19 @@
 class DiscountCodeService
+  def self.active_discount_code?(wheel:, email:)
+    discount_code = DiscountCode.find_by(wheel: wheel, email: email)
+
+    return false if discount_code.blank?
+    return false if discount_code.expired?
+
+    true
+  end
+
   def self.create_discount_code(wheel_segment:, email:)
     wheel = wheel_segment.wheel
-
-    discount_code = DiscountCode.find_or_initialize_by(wheel: wheel, email: email)
-    return discount_code if discount_code.persisted?
-
     random_string = generate_random_string(length: 8)
     shopify_price_rule, shopify_discount_code = ShopifyApiService.new(shop: wheel.shop).create_discount_code(code: random_string)
 
-    discount_code.update!(
+    DiscountCode.create!(
       wheel: wheel,
       email: email,
       code: shopify_discount_code.code,
@@ -16,8 +21,6 @@ class DiscountCodeService
       shopify_price_rule_id: shopify_price_rule.id,
       shopify_discount_code_id: shopify_discount_code.id
     )
-
-    discount_code
   end
 
   private
