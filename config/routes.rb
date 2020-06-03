@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resource :wheel
 
-  namespace :proxy do
+  namespace :proxy, path: '/apps/joltify' do
     resources :shops, only: :none do
       resource :snippet, only: [:show]
       resource :frame, only: [:show]

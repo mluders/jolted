@@ -5,6 +5,7 @@ import Prize from './Prize';
 import Spinner from './Spinner';
 import Wheel from './Wheel';
 
+// TODO: delete this function
 function fakeEmail() {
   var chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
   var string = '';
@@ -37,12 +38,12 @@ export default class App extends React.Component {
 
   discountCodeURL = () => {
     const { shopId } = this.props;
-    return `/proxy/shops/${shopId}/discount_codes`
+    return `/apps/joltify/shops/${shopId}/discount_codes`
   }
 
   wheelURL = () => {
     const { shopId } = this.props;
-    return `/proxy/shops/${shopId}/wheel`
+    return `/apps/joltify/shops/${shopId}/wheel`
   }
 
   fetchWheelData = async () => {
