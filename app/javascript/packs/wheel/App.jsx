@@ -5,6 +5,15 @@ import Prize from './Prize';
 import Spinner from './Spinner';
 import Wheel from './Wheel';
 
+function fakeEmail() {
+  var chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
+  var string = '';
+  for(var ii=0; ii<15; ii++){
+      string += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return `${string}@fake.com`;
+}
+
 export default class App extends React.Component {
   static propTypes = {
     shopId: PropTypes.string.isRequired,
@@ -16,9 +25,11 @@ export default class App extends React.Component {
     this.state = {
       wheelData: null,
       wheel: null,
+      email: fakeEmail(),
       prize: null,
       isFetchingPrize: false,
-      wheelHasSpun: false
+      wheelHasSpun: false,
+      formError: ''
     }
 
     this.fetchWheelData();
@@ -58,13 +69,31 @@ export default class App extends React.Component {
       body: JSON.stringify(data)
     });
 
-    const { prize, segment_index: segmentIndex } = await response.json();
+    const body = await response.json();
 
-    this.setState({
-      ...this.state,
-      isFetchingPrize: false,
-      prize: prize
-    }, () => this.spinWheel(segmentIndex));
+    switch (response.status) {
+      case 201:
+        const { prize, segment_index: segmentIndex } = body;
+        this.setState({
+          ...this.state,
+          isFetchingPrize: false,
+          prize: prize
+        }, () => this.spinWheel(segmentIndex));
+        break;
+      case 422:
+        this.setState({
+          ...this.state,
+          isFetchingPrize: false,
+          formError: "You've already spun the wheel"
+        });
+        break;
+      default:
+        this.setState({
+          ...this.state,
+          isFetchingPrize: false,
+          formError: 'Something went wrong'
+        });
+    }
   };
 
   spinWheel = (segment) => {
@@ -74,10 +103,20 @@ export default class App extends React.Component {
     wheel.startAnimation();
   };
 
-  onFormSubmit = (email) => {
+  onChangeEmail = (email) => {
+    this.setState({
+      ...this.state,
+      email: email
+    });
+  }
+
+  onFormSubmit = () => {
+    const { email } = this.state;
+
     this.setState({
       ...this.state,
       isFetchingPrize: true,
+      formError: ''
     }, () => this.fetchPrize(email))
   };
 
@@ -96,7 +135,7 @@ export default class App extends React.Component {
   };
 
   currentFormComponent = () => {
-    const { wheelData, prize, isFetchingPrize, wheelHasSpun } = this.state;
+    const { wheelData, email, prize, isFetchingPrize, wheelHasSpun } = this.state;
 
     if (!wheelData) return <Spinner />;
     if (isFetchingPrize) return <Spinner />;
@@ -105,17 +144,24 @@ export default class App extends React.Component {
 
     return (
       <Form
+        email={email}
         callToAction='Try your luck'
+        onChangeEmail={this.onChangeEmail}
         onSubmit={this.onFormSubmit}
       />
     );
   }
 
   render() {
-    const { wheelData } = this.state;
+    const { wheelData, formError } = this.state;
 
     return (
       <div>
+        {
+          formError &&
+          <div className="alert alert-danger" role="alert">{formError}</div>
+        }
+
         {this.currentFormComponent()}
 
         {

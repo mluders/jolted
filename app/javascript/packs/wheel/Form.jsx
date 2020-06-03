@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 export default class Form extends React.Component {
   static propTypes = {
+    email: PropTypes.string.isRequired,
     callToAction: PropTypes.string.isRequired,
+    onChangeEmail: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired
   };
 
@@ -11,22 +13,22 @@ export default class Form extends React.Component {
     super(props);
 
     this.state = {
-      email: 'fake@fake.com',
       emailError: ''
     };
   }
 
   onChangeEmail = (event) => {
+    const email = event.target.value;
+
     this.setState({
       ...this.state,
-      email: event.target.value,
       emailError: ''
-    });
+    }, () => this.props.onChangeEmail(email));
   };
 
   validateForm = () => {
     let valid = true;
-    const { email } = this.state;
+    const { email } = this.props;
     let emailError;
 
     if (!this.validateEmail(email)) {
@@ -49,13 +51,13 @@ export default class Form extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    const { email } = this.state;
-    if (this.validateForm()) this.props.onSubmit(email);
+    if (this.validateForm()) this.props.onSubmit();
   }
 
   render() {
     const { callToAction } = this.props;
-    const { email, emailError } = this.state;
+    const { email } = this.props;
+    const { emailError } = this.state;
 
     return (
       <div>

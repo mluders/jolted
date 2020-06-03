@@ -4,7 +4,6 @@ import App from './wheel/App'
 
 document.addEventListener('DOMContentLoaded', () => {
   const packData = document.getElementById('pack-data');
-  console.log(packData);
   const { shopId } = packData.dataset;
 
   ReactDOM.render(
