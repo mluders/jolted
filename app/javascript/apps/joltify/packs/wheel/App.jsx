@@ -158,21 +158,28 @@ export default class App extends React.Component {
 
     return (
       <div>
-        {
-          formError &&
-          <div className="alert alert-danger" role="alert">{formError}</div>
-        }
+        <div className="container" style={{ height: '100vh' }}>
+          <div className="row justify-content-center text-center" style={{ height: '100vh' }}>
+            <div className="col-12 col-md-7 col-lg-5 order-2 order-md-1 align-self-center" style={{ transform: 'rotate(90deg)' }}>
+              {
+                wheelData &&
+                <Wheel
+                  wheelData={wheelData}
+                  onCreateWheel={this.onCreateWheel}
+                  afterSpinWheel={this.afterSpinWheel}
+                />
+              }
+            </div>
+            <div className="col-12 col-md-5 col-lg-5 order-1 order-md-2 align-self-center">
+              {
+                formError &&
+                <div className="alert alert-danger" role="alert">{formError}</div>
+              }
 
-        {this.currentFormComponent()}
-
-        {
-          wheelData &&
-          <Wheel
-            wheelData={wheelData}
-            onCreateWheel={this.onCreateWheel}
-            afterSpinWheel={this.afterSpinWheel}
-          />
-        }
+              {this.currentFormComponent()}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

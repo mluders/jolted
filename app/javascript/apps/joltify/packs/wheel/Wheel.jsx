@@ -23,7 +23,6 @@ export default class Wheel extends React.Component {
   createWheel = () => {
     const wheel = new Winwheel({
       'canvasId'     : 'wheel-canvas',
-      'centerX'      : 30,
       'numSegments'  : 10,
       'outerRadius'  : 212,
       'textFontSize' : 15,
@@ -44,7 +43,7 @@ export default class Wheel extends React.Component {
   render() {
     return (
       <div>
-        <canvas id='wheel-canvas' className='wheel-canvas' width='500' height='500'>
+        <canvas id="wheel-canvas" className="wheel-canvas w-100" width="500" height="500">
           Canvas not supported, use another browser.
         </canvas>
       </div>
