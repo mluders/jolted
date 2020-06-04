@@ -8,7 +8,10 @@ class Wheel < ApplicationRecord
   validate :min_segments
 
   def random_segment_index
-    rand(0...MIN_SEGMENTS)
+    weights = self.wheel_segments.map(&:gravity)
+    weights = weights.each_with_index.map do |weight, i|
+      Array.new(weight) { i }
+    end.flatten.sample
   end
 
   private

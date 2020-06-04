@@ -27,6 +27,6 @@ class WheelsController < AuthenticatedController
   private
 
   def create_params
-    params.require(:wheel).permit(wheel_segments_attributes: [:label])
+    params.require(:wheel).permit(wheel_segments_attributes: [:label, :gravity])
   end
 end
