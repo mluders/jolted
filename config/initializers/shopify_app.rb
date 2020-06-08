@@ -9,7 +9,7 @@ ShopifyApp.configure do |config|
   # https://help.shopify.com/en/api/getting-started/authentication/oauth/scopes
   config.scope = 'read_products, read_price_rules, write_price_rules, read_discounts, write_discounts'
 
-  config.embedded_app = true
+  config.embedded_app = false
   config.after_authenticate_job = false
   config.api_version = Rails.application.config.shopify[:api_version]
   config.shop_session_repository = 'Shop'
