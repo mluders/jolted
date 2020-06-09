@@ -1,5 +1,5 @@
 class Wheel < ApplicationRecord
-  MIN_SEGMENTS = 10
+  MIN_SEGMENTS = 12
 
   belongs_to :shop
   has_many :wheel_segments, dependent: :destroy

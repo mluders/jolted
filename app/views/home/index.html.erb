@@ -1,25 +1,10 @@
-<%= link_to 'Wheel', wheel_path %>
-
-<hr>
-
-<h2>Products</h2>
-
-<ul>
-  <% @products.each do |product| %>
-    <li><%= link_to product.title, "https://#{@current_shopify_session.domain}/admin/products/#{product.id}", target: "_top" %></li>
-  <% end %>
-</ul>
-
-<hr>
-
-<h2>Webhooks</h2>
-
-<% if @webhooks.present? %>
-  <ul>
-    <% @webhooks.each do |webhook| %>
-      <li><%= webhook.topic %> : <%= webhook.address %></li>
-    <% end %>
-  </ul>
+<% if @wheel.present? %>
+  <%= render 'wheels/preview', locals: { wheel: @wheel } %>
 <% else %>
-  <p>This app has not created any webhooks for this Shop. Add webhooks to your ShopifyApp initializer if you need webhooks</p>
+  <div class="jumbotron text-center">
+    <h2 class="mb-4">Add a prize wheel to your Shopify store.</h2>
+    <p class="lead">
+      <%= link_to 'Create Wheel', edit_wheel_path, class: 'btn btn-lg btn-primary' %>
+    </p>
+  </div>
 <% end %>

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root :to => 'home#index'
   mount ShopifyApp::Engine, at: '/'
 
-  resource :wheel
+  resource :wheel, only: [:show, :edit, :update]
 
   namespace :proxy, path: '/apps/joltify' do
     resources :shops, only: :none do

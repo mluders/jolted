@@ -2,7 +2,6 @@
 
 class HomeController < AuthenticatedController
   def index
-    @products = ShopifyAPI::Product.find(:all, params: { limit: 10 })
-    @webhooks = ShopifyAPI::Webhook.find(:all)
+    @wheel = Wheel.find_by(shop: current_shop)
   end
 end
