@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resource :wheel, only: [:show, :edit, :update]
 
   namespace :api do
-    resource :wheel, only: [:show]
+    resource :wheel, only: [:edit, :update]
   end
 
   namespace :proxy, path: '/apps/joltify' do

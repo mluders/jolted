@@ -1,10 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './wheel_form/App'
+import { StoreProvider } from './Store';
+import App from './components/App';
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <App />,
+    <StoreProvider>
+      <App />
+    </StoreProvider>,
     document.getElementById('wheel-form-container'),
   )
 });

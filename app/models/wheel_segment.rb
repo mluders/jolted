@@ -5,5 +5,6 @@ class WheelSegment < ApplicationRecord
 
   default_scope { order(:position) }
 
+  validates :label, presence: true
   validates :outcome, inclusion: { in: WheelSegment.outcomes.keys }
 end

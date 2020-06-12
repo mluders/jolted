@@ -1,15 +1,19 @@
 module API
   class WheelsController < API::BaseController
+    def edit
+      current_shop = Shop.first # TODO: change me
+      wheel = Wheel.find_by(shop: current_shop) || WheelService.new_wheel(shop: current_shop)
+      render json: { wheel: wheel_as_json(wheel) } # TODO: render only necessary fields
+    end
+
     def update
-      @wheel = Wheel.find_or_initialize_by(shop: Shop.first) # TODO: Get shop from API token
-      @wheel.assign_attributes(update_params)
+      wheel = Wheel.find_or_initialize_by(shop: Shop.first) # TODO: Get shop from API token
+      wheel.assign_attributes(update_params)
   
-      if @wheel.save
-        flash.now[:success] = "Your wheel has been updated"
-        redirect_to root_path
+      if wheel.save
+        render json: { message: 'Wheel was saved successfully' }
       else
-        flash.now[:error] = @wheel.errors.full_messages.to_sentence
-        render :edit
+        render json: { wheel: wheel_as_json(wheel) }, status: :unprocessable_entity
       end
     end
   
@@ -17,6 +21,10 @@ module API
   
     def update_params
       params.require(:wheel).permit(wheel_segments_attributes: [:id, :label, :gravity, :position, :outcome])
+    end
+
+    def wheel_as_json(wheel)
+      wheel.as_json(include: { wheel_segments: { methods: :errors }}, methods: :errors)
     end
   end
 end
