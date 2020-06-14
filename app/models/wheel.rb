@@ -6,6 +6,7 @@ class Wheel < ApplicationRecord
   accepts_nested_attributes_for :wheel_segments
 
   validate :min_segments
+  validates_associated :wheel_segments
 
   def random_segment_index
     weights = self.wheel_segments.map(&:gravity)

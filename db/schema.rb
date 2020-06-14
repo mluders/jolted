@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_04_151506) do
+ActiveRecord::Schema.define(version: 2020_06_14_211724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(version: 2020_06_04_151506) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "gravity", null: false
+    t.integer "discount_percent"
+    t.string "raw_discount_code"
     t.index ["wheel_id"], name: "index_wheel_segments_on_wheel_id"
   end
 
@@ -52,6 +54,7 @@ ActiveRecord::Schema.define(version: 2020_06_04_151506) do
     t.uuid "shop_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "use_dynamic_discount_codes", default: true, null: false
     t.index ["shop_id"], name: "index_wheels_on_shop_id"
   end
 

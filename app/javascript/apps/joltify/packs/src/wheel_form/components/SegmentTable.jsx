@@ -1,5 +1,6 @@
-import React from 'react'
+import React from 'react';
 import Card from './Card';
+import SegmentDiscount from './SegmentDiscount';
 
 export default function SegmentTable(props) {
   const toPercentage = (x) => {
@@ -20,7 +21,6 @@ export default function SegmentTable(props) {
 
         <td>
           <input
-            placeholder="Label"
             className={`form-control ${labelError ? 'is-invalid' : ''}`}
             readOnly={segment.outcome == 'losing'}
             value={segment.label || ''}
@@ -32,9 +32,22 @@ export default function SegmentTable(props) {
         <td>
           {
             segment.outcome == 'winning' &&
+            <SegmentDiscount
+              isSubmitting={isSubmitting}
+              segment={segment}
+              segmentIndex={index}
+              useDynamicDiscountCodes={wheel.useDynamicDiscountCodes}
+              changeSegment={changeSegment}
+            />
+          }
+        </td>
+
+        <td>
+          {
+            segment.outcome == 'winning' &&
             <span>
               <select
-                className="form-control"
+                className="custom-select"
                 value={segment.gravity}
                 onChange={(e) => changeSegment(index, 'gravity', e.target.value)}
               >
@@ -69,6 +82,7 @@ export default function SegmentTable(props) {
           <tr>
             <th scope="col"></th>
             <th scope="col">Label</th>
+            <th scope="col">{props.wheel.useDynamicDiscountCodes ? 'Discount' : 'Raw Discount Code'}</th>
             <th scope="col">Gravity</th>
             <th scope="col">Likelihood</th>
           </tr>

@@ -20,7 +20,15 @@ module API
     private
   
     def update_params
-      params.require(:wheel).permit(wheel_segments_attributes: [:id, :label, :gravity, :position, :outcome])
+      params.require(:wheel).permit(:use_dynamic_discount_codes, wheel_segments_attributes: [
+        :id,
+        :label,
+        :gravity,
+        :position,
+        :outcome,
+        :discount_percent,
+        :raw_discount_code
+      ])
     end
 
     def wheel_as_json(wheel)

@@ -1,5 +1,3 @@
-import { camelKeys } from 'js-convert-case';
-
 export async function getWheel() {
   const response = await fetch('/api/wheel/edit', {
     headers: {
@@ -13,19 +11,20 @@ export async function getWheel() {
 }
 
 export async function updateWheel(wheelData) {
+  const { useDynamicDiscountCodes } = wheelData;
 
   const response = await fetch('/api/wheel', {
     method: 'PUT',
     headers: {
-      'Key-Inflection': 'snake',
+      'Key-Inflection': 'camel',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      wheel: wheelData.wheel,
+      useDynamicDiscountCodes,
       wheelSegmentsAttributes: wheelData.wheelSegments
     })
   });
 
   const json = await response.json();
-  return [response.status, camelKeys(json, { recursive: true })];
+  return [response.status, json];
 }

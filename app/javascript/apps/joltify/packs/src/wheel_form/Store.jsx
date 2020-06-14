@@ -7,6 +7,12 @@ export const StoreProvider = ({ children }) => {
   const store = useLocalStore(() => ({
     isSubmitting: false,
     wheel: null,
+    changeWheel: (key, value) => {
+      store.wheel = {
+        ...store.wheel,
+        [key]: value
+      }
+    },
     changeSegment: (index, key, value) => {
       const clonedSegments = JSON.parse(JSON.stringify(store.wheel.wheelSegments));
       clonedSegments[index][key] = value;

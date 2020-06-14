@@ -37,7 +37,7 @@ export default function App() {
   }
 
   return useObserver(() => {
-    const { isSubmitting, wheel, changeSegment } = store;
+    const { isSubmitting, wheel, changeWheel, changeSegment } = store;
 
     return (
       <div>
@@ -48,6 +48,7 @@ export default function App() {
           <Form
             isSubmitting={isSubmitting}
             wheel={wheel}
+            changeWheel={changeWheel}
             changeSegment={changeSegment}
             onSave={onSave}
           />
