@@ -75,7 +75,7 @@ export default class Form extends React.Component {
             <small className="text-danger">{emailError}</small>
           </div>
           <button
-            className='btn btn-primary'
+            className='btn btn-block btn-primary'
             onClick={this.onSubmit}
           >
             {callToAction}

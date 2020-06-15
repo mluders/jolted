@@ -1,9 +1,14 @@
 function openNav() {
-  document.getElementById('main-joltify-popup').style.width = "100%";
+  document.getElementById('main-joltify-popup').classList.add('open');
+  document.getElementById('joltify-popup-background').classList.add('open');
+
+  document.body.style.overflow = 'hidden';
 }
 
 function closeNav() {
-  document.getElementById('main-joltify-popup').style.width = "0%";
+  document.getElementById('main-joltify-popup').classList.remove('open');
+  document.getElementById('joltify-popup-background').classList.remove('open');
+  document.body.style.overflow = 'visible';
 }
 
 document.addEventListener("DOMContentLoaded", () => {
