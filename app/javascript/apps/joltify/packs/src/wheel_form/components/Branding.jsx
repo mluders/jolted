@@ -1,29 +1,62 @@
 import React from 'react'
-import PropTypes from 'prop-types';
+import ColorPicker from './ColorPicker';
 
-export default class Branding extends React.Component {
-  render() {
-    return (
-      <div className="card">
-        <div className="card-body">
-          <table className="table">
-            <tbody>
-              <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-              </tr>
-              <tr>
-                <td>Jacob</td>
-                <td>Thornton</td>
-              </tr>
-              <tr>
-                <td>Larry</td>
-                <td>the Bird</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    );
+export default function Branding(props) {
+  const {
+    changeWheel,
+    popupBackgroundColor,
+    popupFontColor,
+    popupAccentColor
+  } = props;
+
+  const changePopupBackgroundColor = (color) => {
+    changeWheel('popupBackgroundColor', color)
   }
+
+  const changePopupFontColor = (color) => {
+    changeWheel('popupFontColor', color)
+  }
+
+  const changePopupAccentColor = (color) => {
+    changeWheel('popupAccentColor', color)
+  }
+
+
+  return (
+    <div className="card">
+      <div className="card-body">
+        <table className="table table-borderless">
+          <tbody>
+            <tr>
+              <td>Background color</td>
+              <td>
+                <ColorPicker
+                  currentColor={popupBackgroundColor}
+                  onChange={changePopupBackgroundColor}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Font color</td>
+              <td>
+                <ColorPicker
+                  currentColor={popupFontColor}
+                  onChange={changePopupFontColor}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Accent color</td>
+              <td>
+                <ColorPicker
+                  currentColor={popupAccentColor}
+                  onChange={changePopupAccentColor}
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }

@@ -32,7 +32,7 @@ export default function App() {
       store.isSubmitting = false;
       const { wheel } = data;
       store.wheel = wheel;
-      console.log(wheel);
+      console.log(wheel); // TODO: Get rid of all console logs
     }
   }
 

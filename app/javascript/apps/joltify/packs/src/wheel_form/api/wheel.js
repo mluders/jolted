@@ -11,7 +11,12 @@ export async function getWheel() {
 }
 
 export async function updateWheel(wheelData) {
-  const { useDynamicDiscountCodes } = wheelData;
+  const {
+    popupBackgroundColor,
+    popupFontColor,
+    popupAccentColor,
+    useDynamicDiscountCodes
+  } = wheelData;
 
   const response = await fetch('/api/wheel', {
     method: 'PUT',
@@ -20,6 +25,9 @@ export async function updateWheel(wheelData) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
+      popupBackgroundColor,
+      popupFontColor,
+      popupAccentColor,
       useDynamicDiscountCodes,
       wheelSegmentsAttributes: wheelData.wheelSegments
     })

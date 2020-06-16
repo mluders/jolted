@@ -1,6 +1,7 @@
 import React from 'react'
 import ActionBar from './ActionBar';
 import Section from './Section';
+import Branding from './Branding';
 import DiscountSettings from './DiscountSettings';
 import SegmentTable from './SegmentTable';
 
@@ -15,6 +16,15 @@ export default function Form(props) {
 
   return (
     <div>
+      <Section title='Branding'>
+        <Branding
+          changeWheel={changeWheel}
+          popupBackgroundColor={wheel.popupBackgroundColor}
+          popupFontColor={wheel.popupFontColor}
+          popupAccentColor={wheel.popupAccentColor}
+        />
+      </Section>
+
       <Section title='Coupon settings'>
         <DiscountSettings
           useDynamicDiscountCodes={wheel.useDynamicDiscountCodes}
