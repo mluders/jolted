@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './wheel/App'
+import App from './components/App';
 
 document.addEventListener('DOMContentLoaded', () => {
   const packData = document.getElementById('pack-data');

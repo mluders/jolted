@@ -4,6 +4,7 @@ import { getWheel, updateWheel } from '../api/wheel';
 import { StoreContext } from '../Store';
 import Spinner from './Spinner';
 import Form from './Form';
+import Wheel from '../../shared/Wheel';
 
 export default function App() {
   const store = React.useContext(StoreContext);
@@ -39,21 +40,24 @@ export default function App() {
   return useObserver(() => {
     const { isSubmitting, wheel, changeWheel, changeSegment } = store;
 
-    return (
-      <div>
-        {!wheel && <Spinner />}
+    // return (
+    //   <div>
+    //     {!wheel && <Spinner />}
 
-        {
-          wheel &&
-          <Form
-            isSubmitting={isSubmitting}
-            wheel={wheel}
-            changeWheel={changeWheel}
-            changeSegment={changeSegment}
-            onSave={onSave}
-          />
-          }
-      </div>
-    );
+    //     {
+    //       wheel &&
+    //       <Form
+    //         isSubmitting={isSubmitting}
+    //         wheel={wheel}
+    //         changeWheel={changeWheel}
+    //         changeSegment={changeSegment}
+    //         onSave={onSave}
+    //       />
+    //       }
+    //   </div>
+    // );
+    return (
+      <Wheel />
+    )
   });
 }
