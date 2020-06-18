@@ -11,7 +11,7 @@ class DiscountCodeService
   def self.create_discount_code(wheel_segment:, email:)
     wheel = wheel_segment.wheel
     random_string = generate_random_string(length: 8)
-    shopify_price_rule, shopify_discount_code = ShopifyApiService.new(shop: wheel.shop).create_discount_code(code: random_string)
+    shopify_price_rule, shopify_discount_code = ShopifyAPIService.new(shop: wheel.shop).create_discount_code(code: random_string)
 
     DiscountCode.create!(
       wheel: wheel,

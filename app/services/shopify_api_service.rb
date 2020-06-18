@@ -1,4 +1,4 @@
-class ShopifyApiService
+class ShopifyAPIService
   APP_NAME = Rails.application.class.parent_name.downcase
   SHOPIFY_API_KEY = Rails.application.credentials.shopify[:api_key]
   SHOPIFY_API_SECRET = Rails.application.credentials.shopify[:api_secret]

@@ -37,7 +37,7 @@
   box-shadow: 6px 0px 20px -5px rgba(0,0,0,0.68);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   #main-joltify-popup {
     width: 75%;
     left: -75%;

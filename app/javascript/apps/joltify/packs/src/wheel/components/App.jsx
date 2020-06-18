@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import Form from './Form';
 import Prize from './Prize';
 import Spinner from './Spinner';
-import Wheel from '../../shared/Wheel';
+//import Wheel from '../../shared/Wheel';
+import Wheel from './Wheel';
 
 // TODO: delete this function
 function fakeEmail() {
