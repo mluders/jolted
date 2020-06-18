@@ -22,7 +22,7 @@
   left: -100%;
   position: fixed; /* Stay in place */
   z-index: 1000000; /* Sit on top */
-  background-color: none; /* Black fallback color */
+  background-color: white; /* Black fallback color */
   overflow-x: hidden; /* Disable horizontal scroll */
   transition: all .35s ease-in-out; /*make it smooth*/
   -webkit-box-shadow: none;

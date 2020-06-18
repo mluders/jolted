@@ -40,24 +40,21 @@ export default function App() {
   return useObserver(() => {
     const { isSubmitting, wheel, changeWheel, changeSegment } = store;
 
-    // return (
-    //   <div>
-    //     {!wheel && <Spinner />}
-
-    //     {
-    //       wheel &&
-    //       <Form
-    //         isSubmitting={isSubmitting}
-    //         wheel={wheel}
-    //         changeWheel={changeWheel}
-    //         changeSegment={changeSegment}
-    //         onSave={onSave}
-    //       />
-    //       }
-    //   </div>
-    // );
     return (
-      <Wheel />
-    )
+      <div>
+        {!wheel && <Spinner />}
+
+        {
+          wheel &&
+          <Form
+            isSubmitting={isSubmitting}
+            wheel={wheel}
+            changeWheel={changeWheel}
+            changeSegment={changeSegment}
+            onSave={onSave}
+          />
+          }
+      </div>
+    );
   });
 }

@@ -1,6 +1,18 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+  body {
+    color: <%= @wheel.popup_font_color %>;
+  }
+</style>
+
 <script><%= render 'tweenmax.min.js' %></script>
 <script><%= render 'winwheel.min.js' %></script>
+
+<style>
+  body {
+    background-color: transparent;
+  }
+</style>
 
 <div id="pack-data" data-shop-id="<%= params[:shop_id] %>"></div>
 <%= javascript_pack_tag 'wheel', 'data-shop-id': params[:id] %>

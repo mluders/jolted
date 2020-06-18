@@ -3,7 +3,8 @@ module Proxy
     skip_before_action :verify_authenticity_token, only: [:show]
 
     def show
-      Shop.find(params.require(:shop_id)) # Assert shop exists
+      shop = Shop.find(params.require(:shop_id)) # Assert shop exists
+      @wheel = Wheel.find_by!(shop: shop)
     end
   end
 end

@@ -3,7 +3,7 @@ module Proxy
     layout 'frame'
 
     def show
-      Shop.find(params.require(:shop_id)) # Assert shop exists
+      @wheel = Wheel.find_by!(shop_id: params.require(:shop_id))
     end
   end
 end
