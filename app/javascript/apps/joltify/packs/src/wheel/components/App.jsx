@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Form from './Form';
 import Prize from './Prize';
 import Spinner from './Spinner';
-import Wheel from './Wheel';
+import Wheel from '../../shared/Wheel';
 
 // TODO: delete this function
 function fakeEmail() {
@@ -160,7 +160,7 @@ export default class App extends React.Component {
       <div>
         <div className="container" style={{ height: '100vh' }}>
           <div className="row justify-content-center text-center" style={{ height: '100vh' }}>
-            <div className="col-12 col-md-7 col-lg-5 order-2 order-md-1 align-self-center" style={{ transform: 'rotate(90deg)' }}>
+            <div className="col-12 col-md-6 col-lg-6 order-2 order-md-1">
               {
                 wheelData &&
                 <Wheel
@@ -170,7 +170,7 @@ export default class App extends React.Component {
                 />
               }
             </div>
-            <div className="col-12 col-md-5 col-lg-5 order-1 order-md-2 align-self-center">
+            <div className="col-12 col-md-6 col-lg-6 order-1 order-md-2 align-self-center">
               {
                 formError &&
                 <div className="alert alert-danger" role="alert">{formError}</div>
