@@ -19,15 +19,27 @@ export default class Wheel extends React.Component {
     this.createWheel();
   }
 
-  generateSegments = () => {
+  generateInnerSegments = () => {
     const { segments } = this.props.wheelData;
     console.log(segments);
 
     return segments.map((s) => {
       return ({
         'fillStyle': '#eae56f',
+        'strokeStyle': '#eae56f',
         'textFillStyle': '#ffffff',
         'text': s.label
+      });
+    });
+  }
+
+  generateBorderSegments = () => {
+    const { segments } = this.props.wheelData;
+
+    return segments.map((s) => {
+      return ({
+        'fillStyle': '#ffffff',
+        'strokeStyle': '#ffffff'
       });
     });
   }
@@ -35,31 +47,64 @@ export default class Wheel extends React.Component {
   createWheel = () => {
     const { segments } = this.props.wheelData;
 
-    const wheel = new Winwheel({
+    const innerWheel = new Winwheel({
       'canvasId'     : 'wheel-canvas',
       'numSegments'  : segments.length,
-      'outerRadius'  : 700,
+      'outerRadius'  : 630,
+      'innerRadius'  : 100,
       'textFontSize' : 48,
-      'lineWidth'    : 0.0001,
-      'segments'     : this.generateSegments(),
-      'animation'    :
-      {
+      'lineWidth'    : 1,
+      'segments'     : this.generateInnerSegments(),
+    });
+
+    const borderWheel = new Winwheel({
+      'canvasId'     : 'wheel-canvas',
+      'numSegments'  : segments.length,
+      'outerRadius'  : 670,
+      'textFontSize' : 48,
+      'lineWidth'    : 1,
+      'segments'     : this.generateBorderSegments(),
+      'animation'    : {
         'type'     : 'spinToStop',
-        'duration' : 5,
-        'spins'    : 8,
-        'callbackFinished' : this.props.afterSpinWheel
-      },
-      'pins':
-      {
-        'number'      : segments.length,
-        'outerRadius' : 15,
-        'margin'      : 0,
-        'fillStyle'   : '#333333',
-        'strokeStyle' : '#333333'
+        'duration' : 10,
+        'spins'    : 16,
+        'callbackAfter': () => {
+          innerWheel.rotationAngle = borderWheel.rotationAngle;
+          innerWheel.draw(false);
+          drawPointer();
+        },
+        'callbackFinished': this.props.afterSpinWheel
       }
     });
 
-    this.props.onCreateWheel(wheel);
+    const drawPointer = () =>
+    {
+      const canvas = document.getElementById('wheel-canvas');
+      let ctx = canvas.getContext('2d');
+
+      if (!ctx) return;
+
+      ctx.strokeStyle = 'white';
+      ctx.fillStyle   = 'aqua';
+      ctx.lineWidth   = 25;
+      ctx.beginPath();
+      ctx.moveTo(800, 50);
+      ctx.lineTo(750, 175);
+      ctx.lineTo(700, 50);
+      ctx.closePath();
+      ctx.shadowColor = 'rgba(0,0,0,0.2)';
+      ctx.shadowBlur = 25;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+      ctx.fill();
+    }
+
+    borderWheel.draw();
+    innerWheel.draw(false);
+    drawPointer()
+
+
+    this.props.onCreateWheel(borderWheel);
   };
 
   render() {

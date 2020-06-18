@@ -3,6 +3,26 @@
   body {
     color: <%= @wheel.popup_font_color %>;
   }
+
+  .form-control {
+    border: none;
+  }
+
+  input:focus, input:active {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .btn-primary {
+    color: white !important;
+    background-color: <%= @wheel.popup_accent_color %> !important;
+    border-color: <%= @wheel.popup_accent_color %> !important;
+  }
+
+  .btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+  }
 </style>
 
 <script><%= render 'tweenmax.min.js' %></script>

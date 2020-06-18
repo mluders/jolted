@@ -1,4 +1,5 @@
 import React from 'react'
+import InlineFormError from './InlineFormError';
 
 const MIN_DISCOUNT_PERCENT = 5;
 const MAX_DISCOUNT_PERCENT = 90;
@@ -19,7 +20,7 @@ export default function SegmentDiscount(props) {
       percents.push(p);
     }
 
-    return percents.map((p) => <option key={p}>{p}</option>)
+    return percents.map((p) => <option key={p} value={p}>{p}{p && '%'}</option>)
   }
   
   const handleDiscountPercentChange = (e) => {
@@ -36,19 +37,15 @@ export default function SegmentDiscount(props) {
       {
         useDynamicDiscountCodes &&
         <span>
-          <div className="input-group">
-            <select
-              className={`custom-select ${discountPercentError ? 'is-invalid' : ''}`}
-              value={segment.discountPercent}
-              onChange={handleDiscountPercentChange}
-            >
-              {discountPercentOptions()}
-            </select>
-            <div className="input-group-append">
-              <label className="input-group-text">%&nbsp;&nbsp;off</label>
-            </div>
-          </div>
-          {discountPercentError && <small className="form-text text-danger">{discountPercentError}</small>}
+          <select
+            style={{ minWidth: '100px' }}
+            className={`form-select ${discountPercentError ? 'is-invalid' : ''}`}
+            value={segment.discountPercent}
+            onChange={handleDiscountPercentChange}
+          >
+            {discountPercentOptions()}
+          </select>
+          <InlineFormError message={discountPercentError} />
         </span>
       }
 
@@ -56,12 +53,13 @@ export default function SegmentDiscount(props) {
         !useDynamicDiscountCodes &&
         <span>
           <input
+            style={{ minWidth: '100px' }}
             className={`form-control ${rawDiscountCodeError ? 'is-invalid' : ''}`}
             onChange={handleRawDiscountCodeChange}
             value={segment.rawDiscountCode || ''}
           >
           </input>
-          {rawDiscountCodeError && <small className="form-text text-danger">{rawDiscountCodeError}</small>}
+          <InlineFormError message={rawDiscountCodeError} />
         </span>
       }
     </span>

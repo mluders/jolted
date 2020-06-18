@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Card from './Card';
 import ColorPicker from './ColorPicker';
 
 export default function Branding(props) {
@@ -23,40 +24,38 @@ export default function Branding(props) {
 
 
   return (
-    <div className="card">
-      <div className="card-body">
-        <table className="table table-borderless">
-          <tbody>
-            <tr>
-              <td>Background color</td>
-              <td>
-                <ColorPicker
-                  currentColor={popupBackgroundColor}
-                  onChange={changePopupBackgroundColor}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>Font color</td>
-              <td>
-                <ColorPicker
-                  currentColor={popupFontColor}
-                  onChange={changePopupFontColor}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>Accent color</td>
-              <td>
-                <ColorPicker
-                  currentColor={popupAccentColor}
-                  onChange={changePopupAccentColor}
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <Card title="Branding">
+      <table className="table table-borderless">
+        <tbody>
+          <tr>
+            <td>Background color</td>
+            <td>
+              <ColorPicker
+                currentColor={popupBackgroundColor}
+                onChange={changePopupBackgroundColor}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Font color</td>
+            <td>
+              <ColorPicker
+                currentColor={popupFontColor}
+                onChange={changePopupFontColor}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Accent color</td>
+            <td>
+              <ColorPicker
+                currentColor={popupAccentColor}
+                onChange={changePopupAccentColor}
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </Card>
   );
 }

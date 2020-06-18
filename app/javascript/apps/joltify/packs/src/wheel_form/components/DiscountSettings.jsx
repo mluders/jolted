@@ -9,8 +9,8 @@ export default function DiscountSettings(props) {
   };
 
   return (
-    <Card>
-      <div className="form-check">
+    <Card title="Discount Settings">
+      <div className="form-check form-switch">
         <input className="form-check-input"
           type="checkbox"
           checked={useDynamicDiscountCodes}

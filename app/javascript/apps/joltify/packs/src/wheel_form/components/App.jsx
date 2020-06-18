@@ -16,7 +16,6 @@ export default function App() {
       if (status == 200) {
         const { wheel } = data;
         store.wheel = wheel;
-        console.log(wheel);
       }
     }
 
@@ -34,6 +33,14 @@ export default function App() {
       const { wheel } = data;
       store.wheel = wheel;
       console.log(wheel); // TODO: Get rid of all console logs
+      scrollToError();
+    }
+  }
+
+  function scrollToError() {
+    const items = document.getElementsByClassName('is-invalid');
+    if (items.length > 0) {
+      items[0].scrollIntoView();
     }
   }
 
