@@ -1,12 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-const wheelStyle = {
-  height: '100vh',
-  left: '-40vh',
-  position: 'fixed',
-  transform: 'rotate(90deg)'
-};
+import './wheel.css';
 
 export default class Wheel extends React.Component {
   static propTypes = {
@@ -110,7 +104,7 @@ export default class Wheel extends React.Component {
   render() {
     return (
       <div>
-        <canvas id="wheel-canvas" className="wheel-canvas" width="1500" height="1500" style={wheelStyle}>
+        <canvas id="wheel-canvas" className="wheel-canvas" width="1500" height="1500">
           Canvas not supported, use another browser.
         </canvas>
       </div>

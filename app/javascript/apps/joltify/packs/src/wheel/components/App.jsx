@@ -158,9 +158,9 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <div className="container" style={{ height: '100vh' }}>
-          <div className="row justify-content-center text-center" style={{ height: '100vh' }}>
-            <div className="col-12 col-md-6 col-lg-6 order-2 order-md-1">
+        <div>
+          <div className="custom-flex">
+            <div className="wheel-column">
               {
                 wheelData &&
                 <Wheel
@@ -170,7 +170,7 @@ export default class App extends React.Component {
                 />
               }
             </div>
-            <div className="col-12 col-md-6 col-lg-6 order-1 order-md-2 align-self-center">
+            <div className="form-column">
               {
                 formError &&
                 <div className="alert alert-danger" role="alert">{formError}</div>
