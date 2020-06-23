@@ -6,7 +6,7 @@
   height: 100%;
   display: none;
   background-color: none;
-  z-index: 999999; /* Sit on top */
+  z-index: 999997; /* Sit on top */
   transition: all 2s ease-in-out; /*make it smooth*/
 }
 
@@ -21,7 +21,7 @@
   top: 0;
   left: -100%;
   position: fixed; /* Stay in place */
-  z-index: 1000000; /* Sit on top */
+  z-index: 999998; /* Sit on top */
   background-color: white; /* Black fallback color */
   overflow-x: hidden; /* Disable horizontal scroll */
   transition: all .35s ease-in-out; /*make it smooth*/

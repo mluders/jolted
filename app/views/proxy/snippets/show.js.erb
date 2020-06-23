@@ -9,6 +9,12 @@ function closeNav() {
   document.getElementById('main-joltify-popup').classList.remove('open');
   document.getElementById('joltify-popup-background').classList.remove('open');
   document.body.style.overflow = 'visible';
+  
+}
+
+function closePopup() {
+  closeNav();
+  document.getElementById('joltify-popup-tab').style.display = 'none';
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -28,6 +34,6 @@ else if (window.attachEvent) {
 
 function onJoltifyMessage(event) {
   if (event.data.message === 'CLOSE_POPUP') {
-    closeNav();
+    closePopup();
   }
 }
