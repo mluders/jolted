@@ -67,9 +67,9 @@ export default class Form extends React.Component {
           <div className='form-group'>
             <input
               type='email'
-              className='form-control'
+              className={`form-control ${emailError ? 'is-invalid' : ''}`}
               placeholder='Please enter your email'
-              value={email}
+              defaultValue={email}
               onChange={this.onChangeEmail}
             ></input>
             <small className="text-danger">{emailError}</small>

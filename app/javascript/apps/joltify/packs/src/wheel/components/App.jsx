@@ -26,7 +26,7 @@ export default class App extends React.Component {
     this.state = {
       wheelData: null,
       wheel: null,
-      email: fakeEmail(),
+      email: '',
       prize: null,
       isFetchingPrize: false,
       wheelHasSpun: false,
