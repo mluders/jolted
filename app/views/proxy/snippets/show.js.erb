@@ -16,3 +16,18 @@ document.addEventListener("DOMContentLoaded", () => {
   popup.innerHTML = `<%= render 'popup' %>`;
   document.body.insertBefore(popup, document.body.firstChild);
 });
+
+// Setup iframe event listeners
+
+if (window.addEventListener) {
+    window.addEventListener("message", onJoltifyMessage, false);
+} 
+else if (window.attachEvent) {
+    window.attachEvent("onmessage", onJoltifyMessage, false);
+}
+
+function onJoltifyMessage(event) {
+  if (event.data.message === 'CLOSE_POPUP') {
+    closeNav();
+  }
+}
