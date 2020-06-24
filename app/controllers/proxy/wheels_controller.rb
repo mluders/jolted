@@ -17,6 +17,8 @@ module Proxy
       render json: {
         wheel: {
           id: wheel.id,
+          wheel_base_color: wheel.wheel_base_color,
+          colorize_wheel: wheel.colorize_wheel?,
           segments: wheel.wheel_segments.as_json(only: [:label])
         }
       }

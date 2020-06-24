@@ -1,8 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './wheel.css';
+import { adjustColor } from '../color_utils';
 
 export default class Wheel extends React.Component {
+  DEFAULT_SEGMENT_COLORS = [
+    '#2914db',
+    '#ff0160',
+    '#000000'
+  ];
+
   static propTypes = {
     wheelData: PropTypes.object.isRequired,
     onCreateWheel: PropTypes.func.isRequired,
@@ -13,14 +20,30 @@ export default class Wheel extends React.Component {
     this.createWheel();
   }
 
+  calculateSegmentColors = () => {
+    const { wheelBaseColor, colorizeWheel } = this.props.wheelData;
+
+    if (colorizeWheel) {
+      return [
+        adjustColor(wheelBaseColor, 30),
+        wheelBaseColor,
+        adjustColor(wheelBaseColor, -30)
+      ];
+    }
+
+    return this.DEFAULT_SEGMENT_COLORS;
+  }
+
   generateInnerSegments = () => {
     const { segments } = this.props.wheelData;
-    console.log(segments);
+    const colors = this.calculateSegmentColors();
+    console.log(colors);
 
-    return segments.map((s) => {
+    return segments.map((s, index) => {
+      const color = colors[index % colors.length];
       return ({
-        'fillStyle': '#eae56f',
-        'strokeStyle': '#eae56f',
+        'fillStyle': color,
+        'strokeStyle': color,
         'textFillStyle': '#ffffff',
         'text': s.label
       });

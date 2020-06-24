@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 2020_06_16_161106) do
     t.string "popup_background_color", default: "#ffffff", null: false
     t.string "popup_font_color", default: "#000000", null: false
     t.string "popup_accent_color", default: "#007bff", null: false
+    t.string "wheel_base_color", default: "#ff7675", null: false
+    t.boolean "colorize_wheel", default: false, null: false
     t.index ["shop_id"], name: "index_wheels_on_shop_id"
   end
 

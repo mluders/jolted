@@ -49,7 +49,12 @@ export default class App extends React.Component {
   fetchWheelData = async () => {
     const url = this.wheelURL();
 
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Key-Inflection': 'camel'
+      }
+    });
     const { wheel } = await response.json();
 
     this.setState({
@@ -65,7 +70,8 @@ export default class App extends React.Component {
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Key-Inflection': 'camel'
       },
       body: JSON.stringify(data)
     });
