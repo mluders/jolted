@@ -24,6 +24,8 @@ module API
         :popup_background_color,
         :popup_font_color,
         :popup_accent_color,
+        :wheel_base_color,
+        :colorize_wheel,
         :use_dynamic_discount_codes,
         wheel_segments_attributes: [
           :id,

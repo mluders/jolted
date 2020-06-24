@@ -20,6 +20,8 @@ export default function Form(props) {
         popupBackgroundColor={wheel.popupBackgroundColor}
         popupFontColor={wheel.popupFontColor}
         popupAccentColor={wheel.popupAccentColor}
+        wheelBaseColor={wheel.wheelBaseColor}
+        colorizeWheel={wheel.colorizeWheel}
       />
 
       <DiscountSettings

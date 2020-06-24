@@ -15,6 +15,8 @@ export async function updateWheel(wheelData) {
     popupBackgroundColor,
     popupFontColor,
     popupAccentColor,
+    wheelBaseColor,
+    colorizeWheel,
     useDynamicDiscountCodes
   } = wheelData;
 
@@ -28,6 +30,8 @@ export async function updateWheel(wheelData) {
       popupBackgroundColor,
       popupFontColor,
       popupAccentColor,
+      wheelBaseColor,
+      colorizeWheel,
       useDynamicDiscountCodes,
       wheelSegmentsAttributes: wheelData.wheelSegments
     })
