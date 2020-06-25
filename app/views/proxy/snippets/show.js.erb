@@ -18,6 +18,9 @@ function closePopup() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  const live = <%= @wheel.live? %>;
+  if (!live) return;
+
   const popup = document.createElement('div');
   popup.innerHTML = `<%= render 'popup' %>`;
   document.body.insertBefore(popup, document.body.firstChild);

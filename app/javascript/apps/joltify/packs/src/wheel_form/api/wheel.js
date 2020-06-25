@@ -12,6 +12,7 @@ export async function getWheel() {
 
 export async function updateWheel(wheelData) {
   const {
+    live,
     popupBackgroundColor,
     popupFontColor,
     popupAccentColor,
@@ -27,6 +28,7 @@ export async function updateWheel(wheelData) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
+      live,
       popupBackgroundColor,
       popupFontColor,
       popupAccentColor,

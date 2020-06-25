@@ -1,5 +1,6 @@
 import React from 'react'
 import ActionBar from './ActionBar';
+import General from './General';
 import Branding from './Branding';
 import DiscountSettings from './DiscountSettings';
 import SegmentTable from './SegmentTable';
@@ -15,6 +16,11 @@ export default function Form(props) {
 
   return (
     <div>
+      <General
+        live={wheel.live}
+        changeWheel={changeWheel}
+      />
+
       <Branding
         changeWheel={changeWheel}
         popupBackgroundColor={wheel.popupBackgroundColor}
@@ -35,7 +41,11 @@ export default function Form(props) {
         changeSegment={changeSegment}
       />
 
-      <ActionBar callToAction='Save Wheel' onAction={onSave} performingAction={isSubmitting} />
+      <ActionBar
+        callToAction="Save Wheel"
+        onAction={onSave}
+        performingAction={isSubmitting}
+      />
     </div>
   );
 }

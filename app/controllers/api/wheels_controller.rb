@@ -21,6 +21,7 @@ module API
   
     def update_params
       params.require(:wheel).permit(
+        :live,
         :popup_background_color,
         :popup_font_color,
         :popup_accent_color,
