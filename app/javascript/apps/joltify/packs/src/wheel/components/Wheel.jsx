@@ -34,10 +34,16 @@ export default class Wheel extends React.Component {
     return this.DEFAULT_SEGMENT_COLORS;
   }
 
+  calculatePinColor = () => {
+    const segmentColors = this.calculateSegmentColors();
+    if (!segmentColors) return 'aqua';
+
+    return adjustColor(segmentColors[0], 25)
+  }
+
   generateInnerSegments = () => {
     const { segments } = this.props.wheelData;
     const colors = this.calculateSegmentColors();
-    console.log(colors);
 
     return segments.map((s, index) => {
       const color = colors[index % colors.length];
@@ -102,7 +108,7 @@ export default class Wheel extends React.Component {
       if (!ctx) return;
 
       ctx.strokeStyle = 'white';
-      ctx.fillStyle   = 'aqua';
+      ctx.fillStyle   = this.calculatePinColor();
       ctx.lineWidth   = 25;
       ctx.beginPath();
       ctx.moveTo(800, 50);
