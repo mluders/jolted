@@ -1,4 +1,6 @@
 class DiscountCodeService
+  class MissingDurationError < StandardError; end
+
   def self.active_discount_code?(wheel:, email:)
     discount_code = DiscountCode.find_by(wheel: wheel, email: email)
 
@@ -10,8 +12,13 @@ class DiscountCodeService
 
   def self.create_discount_code(wheel_segment:, email:)
     wheel = wheel_segment.wheel
+    raise MissingDurationError if wheel.discount_duration.blank?
+
     random_string = generate_random_string(length: 8)
-    shopify_price_rule, shopify_discount_code = ShopifyAPIService.new(shop: wheel.shop).create_discount_code(code: random_string)
+    shopify_price_rule, shopify_discount_code = ShopifyAPIService.new(shop: wheel.shop).create_discount_code(
+      code: random_string,
+      duration_minutes: wheel.discount_duration
+    )
 
     DiscountCode.create!(
       wheel: wheel,

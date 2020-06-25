@@ -14,7 +14,7 @@ class ShopifyAPIService
     ShopifyAPI::Base.activate_session(session)
   end
 
-  def create_discount_code(code:)
+  def create_discount_code(code:, duration_minutes:)
     price_rule = ShopifyAPI::PriceRule.create(
       title: "#{APP_NAME}_#{code}",
       target_type: "line_item",
@@ -24,7 +24,7 @@ class ShopifyAPIService
       value: "-20.0",
       customer_selection: "all",
       starts_at: Time.current.utc.iso8601,
-      ends_at: (Time.current.utc + 24.hours).iso8601,
+      ends_at: (Time.current.utc + duration_minutes.minutes).iso8601,
       usage_limit: 1
     )
 

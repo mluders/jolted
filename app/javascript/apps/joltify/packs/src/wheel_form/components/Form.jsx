@@ -31,7 +31,8 @@ export default function Form(props) {
       />
 
       <DiscountSettings
-        useDynamicDiscountCodes={wheel.useDynamicDiscountCodes}
+        isSubmitting={isSubmitting}
+        wheel={wheel}
         changeWheel={changeWheel}
       />
 

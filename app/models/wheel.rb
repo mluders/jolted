@@ -7,6 +7,7 @@ class Wheel < ApplicationRecord
 
   validate :min_segments
   validates_associated :wheel_segments
+  validate :discount_duration_exists
 
   def random_segment_index
     weights = self.wheel_segments.map(&:gravity)
@@ -19,5 +20,11 @@ class Wheel < ApplicationRecord
 
   def min_segments
     errors.add(:wheel_segments, "must exist (at least #{MIN_SEGMENTS}") if wheel_segments.size < MIN_SEGMENTS
+  end
+
+  def discount_duration_exists
+    return unless use_dynamic_discount_codes?
+
+    errors.add(:discount_duration, "can't be blank") if discount_duration.blank?
   end
 end

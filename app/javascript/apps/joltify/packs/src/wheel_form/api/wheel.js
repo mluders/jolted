@@ -18,7 +18,8 @@ export async function updateWheel(wheelData) {
     popupAccentColor,
     wheelBaseColor,
     colorizeWheel,
-    useDynamicDiscountCodes
+    useDynamicDiscountCodes,
+    discountDuration
   } = wheelData;
 
   const response = await fetch('/api/wheel', {
@@ -35,6 +36,7 @@ export async function updateWheel(wheelData) {
       wheelBaseColor,
       colorizeWheel,
       useDynamicDiscountCodes,
+      discountDuration,
       wheelSegmentsAttributes: wheelData.wheelSegments
     })
   });

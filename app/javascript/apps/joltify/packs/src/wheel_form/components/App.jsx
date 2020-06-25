@@ -4,7 +4,6 @@ import { getWheel, updateWheel } from '../api/wheel';
 import { StoreContext } from '../Store';
 import Spinner from './Spinner';
 import Form from './Form';
-import Wheel from '../../shared/Wheel';
 
 export default function App() {
   const store = React.useContext(StoreContext);

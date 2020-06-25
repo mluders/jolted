@@ -10,12 +10,12 @@ export default function General(props) {
 
   const alertComponent = () => {
     if (live) {
-      return <div class="alert alert-warning mt-3 mb-0 py-2" role="alert">
+      return <div className="alert alert-warning mt-3 mb-0 py-2" role="alert">
         After saving, this wheel will be live.
       </div>
     }
 
-    return <div class="alert alert-secondary mt-3 mb-0 py-2" role="alert">
+    return <div className="alert alert-secondary mt-3 mb-0 py-2" role="alert">
       After saving, this wheel will be NOT be live.
     </div>
   }

@@ -24,7 +24,6 @@ export default function SegmentDiscount(props) {
   }
   
   const handleDiscountPercentChange = (e) => {
-    console.log(e.target.value);
     changeSegment(segmentIndex, 'discountPercent', e.target.value);
   }
 
@@ -40,7 +39,7 @@ export default function SegmentDiscount(props) {
           <select
             style={{ minWidth: '100px' }}
             className={`form-select ${discountPercentError ? 'is-invalid' : ''}`}
-            value={segment.discountPercent}
+            value={segment.discountPercent || ''}
             onChange={handleDiscountPercentChange}
           >
             {discountPercentOptions()}

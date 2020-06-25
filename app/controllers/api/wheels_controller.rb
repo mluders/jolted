@@ -28,6 +28,7 @@ module API
         :wheel_base_color,
         :colorize_wheel,
         :use_dynamic_discount_codes,
+        :discount_duration,
         wheel_segments_attributes: [
           :id,
           :label,

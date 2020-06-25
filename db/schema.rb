@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2020_06_25_144449) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "use_dynamic_discount_codes", default: false, null: false
+    t.integer "discount_duration"
     t.string "popup_background_color", default: "#ffffff", null: false
     t.string "popup_font_color", default: "#000000", null: false
     t.string "popup_accent_color", default: "#007bff", null: false

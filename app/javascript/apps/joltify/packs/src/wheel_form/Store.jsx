@@ -12,6 +12,7 @@ export const StoreProvider = ({ children }) => {
         ...store.wheel,
         [key]: value
       }
+      store.wheel.errors[key] = [];
     },
     changeSegment: (index, key, value) => {
       const clonedSegments = JSON.parse(JSON.stringify(store.wheel.wheelSegments));

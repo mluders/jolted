@@ -26,7 +26,7 @@ export default class App extends React.Component {
     this.state = {
       wheelData: null,
       wheel: null,
-      email: '',
+      email: fakeEmail(),
       prize: null,
       isFetchingPrize: false,
       wheelHasSpun: false,
@@ -80,7 +80,7 @@ export default class App extends React.Component {
 
     switch (response.status) {
       case 201:
-        const { prize, segment_index: segmentIndex } = body;
+        const { prize, segmentIndex } = body;
         this.setState({
           ...this.state,
           isFetchingPrize: false,
@@ -105,7 +105,8 @@ export default class App extends React.Component {
 
   spinWheel = (segment) => {
     const { wheel } = this.state;
-    let stopAt = wheel.getRandomForSegment(segment);
+    console.log('Segment: ', segment);
+    let stopAt = wheel.getRandomForSegment(segment+1);
     wheel.animation.stopAngle = stopAt;
     wheel.startAnimation();
   };
