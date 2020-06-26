@@ -10,6 +10,8 @@ export default class Wheel extends React.Component {
     '#000000'
   ];
 
+  WHEEL_RADIUS = 670;
+
   static propTypes = {
     wheelData: PropTypes.object.isRequired,
     onCreateWheel: PropTypes.func.isRequired,
@@ -56,49 +58,49 @@ export default class Wheel extends React.Component {
     });
   }
 
-  generateBorderSegments = () => {
-    const { segments } = this.props.wheelData;
-
-    return segments.map((s) => {
-      return ({
-        'fillStyle': '#ffffff',
-        'strokeStyle': '#ffffff'
-      });
-    });
-  }
-
   createWheel = () => {
     const { segments } = this.props.wheelData;
 
     const innerWheel = new Winwheel({
       'canvasId'     : 'wheel-canvas',
       'numSegments'  : segments.length,
-      'outerRadius'  : 630,
+      'outerRadius'  : this.WHEEL_RADIUS - 40,
       'innerRadius'  : 100,
       'textFontSize' : 48,
       'lineWidth'    : 1,
       'segments'     : this.generateInnerSegments(),
-    });
-
-    const borderWheel = new Winwheel({
-      'canvasId'     : 'wheel-canvas',
-      'numSegments'  : segments.length,
-      'outerRadius'  : 670,
-      'textFontSize' : 48,
-      'lineWidth'    : 1,
-      'segments'     : this.generateBorderSegments(),
       'animation'    : {
         'type'     : 'spinToStop',
-        'duration' : 1,
+        'duration' : 10,
         'spins'    : 16,
+        'callbackBefore': () => {
+          drawShadow();
+        },
         'callbackAfter': () => {
-          innerWheel.rotationAngle = borderWheel.rotationAngle;
-          innerWheel.draw(false);
           drawPointer();
         },
         'callbackFinished': this.props.afterSpinWheel
       }
     });
+
+    const drawShadow = () => {
+      const canvas = document.getElementById('wheel-canvas');
+      let ctx = canvas.getContext('2d');
+
+      if (!ctx) return;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.shadowColor = 'rgba(0,0,0,0.3)';
+      ctx.shadowBlur = 50;
+      ctx.shadowOffsetX = 10;
+      ctx.shadowOffsetY = -10;
+      ctx.lineWidth = 50;
+      ctx.fillStyle = "white";
+      ctx.arc(canvas.width / 2, canvas.height / 2, this.WHEEL_RADIUS, 0, 2 * Math.PI);
+      ctx.fill();
+      ctx.restore();
+    }
 
     const drawPointer = () =>
     {
@@ -107,6 +109,7 @@ export default class Wheel extends React.Component {
 
       if (!ctx) return;
 
+      ctx.save();
       ctx.strokeStyle = 'white';
       ctx.fillStyle   = this.calculatePinColor();
       ctx.lineWidth   = 25;
@@ -115,19 +118,19 @@ export default class Wheel extends React.Component {
       ctx.lineTo(750, 175);
       ctx.lineTo(700, 50);
       ctx.closePath();
-      ctx.shadowColor = 'rgba(0,0,0,0.2)';
-      ctx.shadowBlur = 25;
+      ctx.shadowColor = 'rgba(0,0,0,0.3)';
+      ctx.shadowBlur = 40;
       ctx.stroke();
       ctx.shadowBlur = 0;
       ctx.fill();
+      ctx.restore();
     }
 
-    borderWheel.draw();
+    drawShadow();
     innerWheel.draw(false);
-    drawPointer()
+    drawPointer();
 
-
-    this.props.onCreateWheel(borderWheel);
+    this.props.onCreateWheel(innerWheel);
   };
 
   render() {
