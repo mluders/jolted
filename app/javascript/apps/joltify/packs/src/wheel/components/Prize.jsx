@@ -3,16 +3,23 @@ import PropTypes from 'prop-types';
 
 export default class Prize extends React.Component {
   static propTypes = {
-    prize: PropTypes.string.isRequired
+    prizeLabel: PropTypes.string.isRequired,
+    prizeDescription: PropTypes.string.isRequired,
+    prizeValue: PropTypes.string.isRequired
   }
 
   render() {
-    const { prize } = this.props;
+    const { prizeLabel, prizeDescription, prizeValue, callToAction, onAccept } = this.props;
 
     return(
       <div>
-        <h1>Winner!</h1>
-        <p>{prize}</p>
+        <h1>You've hit <b>{prizeLabel}</b>. Woohoo!</h1>
+        <p>Don't forget to use the coupon at checkout.</p>
+        <div className='form-group'>
+          <input className="form-control" value={prizeValue} readOnly></input>
+        </div>
+        <button className="btn btn-block btn-primary" onClick={onAccept}>{callToAction}</button>
+        <small>{prizeDescription}</small>
       </div>
     );
   }

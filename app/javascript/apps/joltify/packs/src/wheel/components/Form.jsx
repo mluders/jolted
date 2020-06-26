@@ -72,7 +72,6 @@ export default class Form extends React.Component {
               defaultValue={email}
               onChange={this.onChangeEmail}
             ></input>
-            <small className="text-danger">{emailError}</small>
           </div>
           <button
             className='btn btn-block btn-primary'

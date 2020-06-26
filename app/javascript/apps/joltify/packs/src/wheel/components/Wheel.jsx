@@ -89,7 +89,7 @@ export default class Wheel extends React.Component {
       'segments'     : this.generateBorderSegments(),
       'animation'    : {
         'type'     : 'spinToStop',
-        'duration' : 10,
+        'duration' : 1,
         'spins'    : 16,
         'callbackAfter': () => {
           innerWheel.rotationAngle = borderWheel.rotationAngle;

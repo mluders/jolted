@@ -19,7 +19,12 @@ module Proxy
         end
       end
 
-      render json: { prize: discount_code, segment_index: segment_index }, status: :created
+      render json: {
+        prize_label: segment.label,
+        prize_description: wheel.prize_description,
+        prize_value: discount_code,
+        segment_index: segment_index
+      }, status: :created
     end
 
     private

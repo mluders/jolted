@@ -4,6 +4,7 @@ import Form from './Form';
 import Prize from './Prize';
 import Spinner from './Spinner';
 import Wheel from './Wheel';
+import CloseButton from './CloseButton';
 
 // TODO: delete this function
 function fakeEmail() {
@@ -27,13 +28,21 @@ export default class App extends React.Component {
       wheelData: null,
       wheel: null,
       email: fakeEmail(),
-      prize: null,
+      prizeLabel: null,
+      prizeDescription: null,
+      prizeValue: null,
       isFetchingPrize: false,
       wheelHasSpun: false,
       formError: ''
     }
 
     this.fetchWheelData();
+  }
+
+  closePopup = () => {
+    window.parent.postMessage({
+      'message': 'CLOSE_POPUP'
+    }, "*");
   }
 
   discountCodeURL = () => {
@@ -80,11 +89,19 @@ export default class App extends React.Component {
 
     switch (response.status) {
       case 201:
-        const { prize, segmentIndex } = body;
+        const {
+          prizeLabel,
+          prizeDescription,
+          prizeValue,
+          segmentIndex
+        } = body;
+
         this.setState({
           ...this.state,
           isFetchingPrize: false,
-          prize: prize
+          prizeLabel,
+          prizeDescription,
+          prizeValue
         }, () => this.spinWheel(segmentIndex));
         break;
       case 422:
@@ -102,6 +119,10 @@ export default class App extends React.Component {
         });
     }
   };
+
+  acceptPrize = () => {
+    this.closePopup();
+  }
 
   spinWheel = (segment) => {
     const { wheel } = this.state;
@@ -143,12 +164,30 @@ export default class App extends React.Component {
   };
 
   currentFormComponent = () => {
-    const { wheelData, email, prize, isFetchingPrize, wheelHasSpun } = this.state;
+    const {
+      wheelData,
+      email,
+      prizeLabel,
+      prizeDescription,
+      prizeValue,
+      isFetchingPrize,
+      wheelHasSpun 
+    } = this.state;
 
     if (!wheelData) return <Spinner />;
     if (isFetchingPrize) return <Spinner />;
-    if (prize && wheelHasSpun) return <Prize prize={prize} />
-    if (prize) return null;
+    if (prizeValue && wheelHasSpun) {
+      return (
+        <Prize
+          prizeLabel={prizeLabel}
+          prizeDescription={prizeDescription}
+          prizeValue={prizeValue}
+          callToAction="Continue & Use Discount"
+          onAccept={this.acceptPrize}
+        />
+      );
+    }
+    if (prizeValue) return null;
 
     return (
       <Form
@@ -165,26 +204,25 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <div>
-          <div className="custom-flex">
-            <div className="wheel-column">
-              {
-                wheelData &&
-                <Wheel
-                  wheelData={wheelData}
-                  onCreateWheel={this.onCreateWheel}
-                  afterSpinWheel={this.afterSpinWheel}
-                />
-              }
-            </div>
-            <div className="form-column">
-              {
-                formError &&
-                <div className="alert alert-danger" role="alert">{formError}</div>
-              }
+        <CloseButton onClick={this.closePopup} />
+        <div className="custom-flex">
+          <div className="wheel-column">
+            {
+              wheelData &&
+              <Wheel
+                wheelData={wheelData}
+                onCreateWheel={this.onCreateWheel}
+                afterSpinWheel={this.afterSpinWheel}
+              />
+            }
+          </div>
+          <div className="form-column">
+            {
+              formError &&
+              <div className="alert alert-danger" role="alert">{formError}</div>
+            }
 
-              {this.currentFormComponent()}
-            </div>
+            {this.currentFormComponent()}
           </div>
         </div>
       </div>

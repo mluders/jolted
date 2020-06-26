@@ -1,11 +1,16 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <style>
   body {
+    background-color: transparent;
     color: <%= @wheel.popup_font_color %>;
   }
 
+  b {
+    color: <%= @wheel.popup_accent_color %>;
+  }
+
   .form-control {
-    border: none;
+    border-color: <%= @wheel.popup_accent_color %>;
   }
 
   input:focus, input:active {
@@ -36,26 +41,6 @@
 
 <script><%= render 'tweenmax.min.js' %></script>
 <script><%= render 'winwheel.min.js' %></script>
-<script>
-  function closePopup() {
-    window.parent.postMessage({
-      'message': 'CLOSE_POPUP'
-    }, "*");
-  }
-</script>
-
-<style>
-  body {
-    background-color: transparent;
-  }
-</style>
-
-<a href="#" id="joltify-close-button" onclick="closePopup()">
-  <svg class="bi bi-x x-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-    <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-  </svg>
-</a>
 
 <div id="pack-data" data-shop-id="<%= params[:shop_id] %>"></div>
 <%= javascript_pack_tag 'wheel', 'data-shop-id': params[:id] %>

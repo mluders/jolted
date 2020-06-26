@@ -1,4 +1,6 @@
 class Wheel < ApplicationRecord
+  include ActionView::Helpers::DateHelper
+
   MIN_SEGMENTS = 12
 
   belongs_to :shop
@@ -14,6 +16,14 @@ class Wheel < ApplicationRecord
     weights = weights.each_with_index.map do |weight, i|
       Array.new(weight) { i }
     end.flatten.sample
+  end
+
+  def prize_description
+    if use_dynamic_discount_codes?
+      "This discount code will expire in #{time_ago_in_words(discount_duration.minutes.from_now)}."
+    else
+      ''
+    end
   end
 
   private
