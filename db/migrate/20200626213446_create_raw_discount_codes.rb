@@ -7,6 +7,6 @@ class CreateRawDiscountCodes < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    add_index :discount_codes, [:wheel_id, :email]
+    add_index :raw_discount_codes, [:wheel_id, :email]
   end
 end

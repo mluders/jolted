@@ -13,9 +13,9 @@ module Proxy
       segment = wheel.wheel_segments[segment_index]
       discount_code = begin
         if wheel.use_dynamic_discount_codes?
-          DiscountCodeService.create_discount_code(wheel_segment: segment, email: email).code
+          DiscountCodeService.create_dynamic_discount_code(wheel_segment: segment, email: email).code
         else
-          segment.raw_discount_code
+          DiscountCodeService.create_raw_discount_code(wheel_segment: segment, email: email).code
         end
       end
 

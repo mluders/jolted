@@ -1,38 +1,57 @@
 class DiscountCodeService
   class MissingDurationError < StandardError; end
+  class MissingRawDiscountError < StandardError; end
 
-  def self.active_discount_code?(wheel:, email:)
-    discount_code = DiscountCode.find_by(wheel: wheel, email: email)
+  class << self
+    def active_discount_code?(wheel:, email:)
+      raw_discount = RawDiscountCode.find_by(wheel: wheel, email: email)
+      return false if raw_discount.blank?
+      return false if raw_discount.expired?
+  
+      dynamic_discount = DiscountCode.find_by(wheel: wheel, email: email)
+      return false if dynamic_discount.blank?
+      return false if dynamic_discount.expired?
 
-    return false if discount_code.blank?
-    return false if discount_code.expired?
+      true
+    end
 
-    true
-  end
+    def create_dynamic_discount_code(wheel_segment:, email:)
+      wheel = wheel_segment.wheel
+      discount_duration = wheel.discount_duration
 
-  def self.create_discount_code(wheel_segment:, email:)
-    wheel = wheel_segment.wheel
-    raise MissingDurationError if wheel.discount_duration.blank?
+      raise MissingDurationError if discount_duration.blank?
 
-    random_string = generate_random_string(length: 8)
-    shopify_price_rule, shopify_discount_code = ShopifyAPIService.new(shop: wheel.shop).create_discount_code(
-      code: random_string,
-      duration_minutes: wheel.discount_duration
-    )
+      random_string = generate_random_string(length: 8)
+      shopify_price_rule, shopify_discount_code = ShopifyAPIService.new(shop: wheel.shop).create_discount_code(
+        code: random_string,
+        percent_off: wheel_segment.discount_percent,
+        duration_minutes: discount_duration,
+      )
 
-    DiscountCode.create!(
-      wheel: wheel,
-      email: email,
-      code: shopify_discount_code.code,
-      expires_at: shopify_price_rule.ends_at,
-      shopify_price_rule_id: shopify_price_rule.id,
-      shopify_discount_code_id: shopify_discount_code.id
-    )
-  end
+      DiscountCode.create!(
+        wheel: wheel,
+        email: email,
+        code: shopify_discount_code.code,
+        expires_at: shopify_price_rule.ends_at,
+        shopify_price_rule_id: shopify_price_rule.id,
+        shopify_discount_code_id: shopify_discount_code.id
+      )
+    end
 
-  private
+    def create_raw_discount_code(wheel_segment:, email:)
+      raise MissingRawDiscountError if wheel_segment.raw_discount_code.blank?
 
-  def self.generate_random_string(length:)
-    SecureRandom.hex.gsub(/./){|s| s.send(%i[upcase downcase].sample)}[0...length]
+      RawDiscountCode.create!(
+        wheel: wheel_segment.wheel,
+        email: email,
+        code: wheel_segment.raw_discount_code
+      )
+    end
+
+    private
+
+    def generate_random_string(length:)
+      SecureRandom.hex.gsub(/./){|s| s.send(%i[upcase].sample)}[0...length]
+    end
   end
 end

@@ -14,14 +14,14 @@ class ShopifyAPIService
     ShopifyAPI::Base.activate_session(session)
   end
 
-  def create_discount_code(code:, duration_minutes:)
+  def create_discount_code(code:, percent_off:, duration_minutes:)
     price_rule = ShopifyAPI::PriceRule.create(
       title: "#{APP_NAME}_#{code}",
       target_type: "line_item",
       target_selection: "all",
       allocation_method: "across",
       value_type: "percentage",
-      value: "-20.0",
+      value: "-#{percent_off.to_f}",
       customer_selection: "all",
       starts_at: Time.current.utc.iso8601,
       ends_at: (Time.current.utc + duration_minutes.minutes).iso8601,
