@@ -1,6 +1,6 @@
 <div class="card <%= @wheel.live ? 'border-warning' : '' %>">
   <div class="card-header">
-    <p class="float-right m-0">
+    <p class="float-left m-0">
       <% if @wheel.live? %>
         <svg class="text-warning bi bi-circle-fill mb-1 mr-1" width="0.6em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <circle cx="8" cy="8" r="8"/>
@@ -9,11 +9,18 @@
       <% else %>
         Not Live
       <% end %>
-      </p>
-    <h5 class="mb-0">My Prize Wheel</h5>
+    </p>
+    <div class="dropdown float-right">
+      <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+        Options
+      </button>
+      <ul class="dropdown-menu dropdown-menu-right" >
+        <li><%= link_to 'Delete Wheel', wheel_path(@wheel), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure you want to delete this wheel?' } %></li>
+      </ul>
+    </div>
   </div>
   <div class="card-body text-center">
     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <%= link_to 'Edit', edit_wheel_path, class: 'btn btn-primary' %>
+    <%= link_to 'Edit Wheel', edit_wheel_path, class: 'btn btn-primary' %>
   </div>
 </div>
