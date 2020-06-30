@@ -9,7 +9,6 @@ function closeNav() {
   document.getElementById('main-joltify-popup').classList.remove('open');
   document.getElementById('joltify-popup-background').classList.remove('open');
   document.body.style.overflow = 'visible';
-  
 }
 
 function closePopup() {
@@ -17,12 +16,20 @@ function closePopup() {
   document.getElementById('joltify-popup-tab').style.display = 'none';
 }
 
+function checkPreviewMode() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const isPreview = urlParams.get('joltify_preview') === 'true';
+  return isPreview;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const live = <%= @wheel.live? %>;
-  if (!live) return;
+  const preview = checkPreviewMode();
+  if (!live && !preview) return;
 
   const popup = document.createElement('div');
   popup.innerHTML = `<%= render 'popup' %>`;
+  popup.innerHTML = popup.innerHTML.replace('joltify_preview=false', `joltify_preview=${preview}`);
   document.body.insertBefore(popup, document.body.firstChild);
 });
 

@@ -31,8 +31,8 @@
 
   .x-icon {
     position: absolute;
-    top: 25px;
-    right: 25px;
+    top: 15px;
+    right: 15px;
     width: 36px;
     height: 36px;
     color: <%= @wheel.popup_font_color %>;
@@ -42,5 +42,5 @@
 <script><%= render 'tweenmax.min.js' %></script>
 <script><%= render 'winwheel.min.js' %></script>
 
-<div id="pack-data" data-shop-id="<%= params[:shop_id] %>"></div>
+<div id="pack-data" data-shop-id="<%= params[:shop_id] %>" data-is-preview="<%= params[:joltify_preview] %>"></div>
 <%= javascript_pack_tag 'wheel', 'data-shop-id': params[:id] %>

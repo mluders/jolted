@@ -30,28 +30,27 @@
   }
 
   @keyframes shake {
-  10%, 90% {
-    transform: rotate(-3deg);
-  }
-  
-  20%, 80% {
-    transform: rotate(6deg);
-  }
+    10%, 90% {
+      transform: rotate(-3deg);
+    }
+    
+    20%, 80% {
+      transform: rotate(6deg);
+    }
 
-  30%, 50%, 70% {
-    transform: rotate(-9deg);
-  }
+    30%, 50%, 70% {
+      transform: rotate(-9deg);
+    }
 
-  40%, 60% {
-    transform: rotate(9deg);
+    40%, 60% {
+      transform: rotate(9deg);
+    }
   }
-}
-
 </style>
 
 <div id="joltify-popup-background"></div>
 
-<iframe id="main-joltify-popup" src="<%= proxy_shop_frame_path %>" frameBorder="0"></iframe>
+<iframe id="main-joltify-popup" src="<%= proxy_shop_frame_path(joltify_preview: false) %>" frameBorder="0"></iframe>
 
 <div id="joltify-popup-tab">
   <a class="joltify-tab-link" href="javascript:void(0);" onclick="openNav()">

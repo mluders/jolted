@@ -5,6 +5,7 @@ import Prize from './Prize';
 import Spinner from './Spinner';
 import Wheel from './Wheel';
 import CloseButton from './CloseButton';
+import PreviewBadge from './PreviewBadge';
 
 // TODO: delete this function
 function fakeEmail() {
@@ -19,6 +20,7 @@ function fakeEmail() {
 export default class App extends React.Component {
   static propTypes = {
     shopId: PropTypes.string.isRequired,
+    isPreview: PropTypes.bool.isRequired
   }
 
   constructor(props) {
@@ -35,7 +37,9 @@ export default class App extends React.Component {
       wheelHasSpun: false,
       formError: ''
     }
+  }
 
+  componentDidMount() {
     this.fetchWheelData();
   }
 
@@ -43,17 +47,17 @@ export default class App extends React.Component {
     window.parent.postMessage({
       'message': 'CLOSE_POPUP'
     }, "*");
-  }
+  };
 
   discountCodeURL = () => {
     const { shopId } = this.props;
     return `/apps/joltify/shops/${shopId}/discount_codes`
-  }
+  };
 
   wheelURL = () => {
     const { shopId } = this.props;
     return `/apps/joltify/shops/${shopId}/wheel`
-  }
+  };
 
   fetchWheelData = async () => {
     const url = this.wheelURL();
@@ -70,10 +74,10 @@ export default class App extends React.Component {
       ...this.state,
       wheelData: wheel
     });
-  }
+  };
 
   fetchPrize = async (email) => {
-    const data = { email };
+    const data = { email, isPreview: this.props.isPreview };
     const url = this.discountCodeURL();
 
     const response = await fetch(url, {
@@ -122,11 +126,10 @@ export default class App extends React.Component {
 
   acceptPrize = () => {
     this.closePopup();
-  }
+  };
 
   spinWheel = (segment) => {
     const { wheel } = this.state;
-    console.log('Segment: ', segment);
     let stopAt = wheel.getRandomForSegment(segment+1);
     wheel.animation.stopAngle = stopAt;
     wheel.startAnimation();
@@ -137,7 +140,7 @@ export default class App extends React.Component {
       ...this.state,
       email: email
     });
-  }
+  };
 
   onFormSubmit = () => {
     const { email } = this.state;
@@ -154,7 +157,7 @@ export default class App extends React.Component {
       ...this.state,
       wheel
     });
-  }
+  };
 
   afterSpinWheel = () => {
     this.setState({
@@ -197,13 +200,15 @@ export default class App extends React.Component {
         onSubmit={this.onFormSubmit}
       />
     );
-  }
+  };
 
   render() {
+    const { isPreview } = this.props;
     const { wheelData, formError } = this.state;
 
     return (
       <div>
+        {isPreview && <PreviewBadge />}
         <CloseButton onClick={this.closePopup} />
         <div className="custom-flex">
           <div className="wheel-column">

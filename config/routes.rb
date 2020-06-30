@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   root :to => 'home#index'
   mount ShopifyApp::Engine, at: '/'
 
-  resource :wheel, only: [:edit, :destroy]
+  resource :wheel, only: [:edit, :destroy] do
+    get 'preview', as: :preview
+  end
 
   namespace :api do
     resource :wheel, only: [:edit, :update]
