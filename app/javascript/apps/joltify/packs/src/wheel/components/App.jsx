@@ -29,7 +29,7 @@ export default class App extends React.Component {
     this.state = {
       wheelData: null,
       wheel: null,
-      email: fakeEmail(),
+      email: '',
       prizeLabel: null,
       prizeDescription: null,
       prizeValue: null,
