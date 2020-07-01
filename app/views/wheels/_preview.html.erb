@@ -1,4 +1,8 @@
-<div class="card <%= @wheel.live ? 'border-warning' : '' %>">
+<script><%= render 'proxy/frames/winwheel.min.js' %></script>
+<div id="pack-data" data-wheel="<%= @wheel.to_json(include: :wheel_segments) %>"></div>
+<%= javascript_pack_tag 'wheel_thumbnail' %>
+
+<div class="card <%= @wheel.live ? 'border-warning' : '' %>  mb-4">
   <div class="card-header">
     <p class="float-left m-0">
       <% if @wheel.live? %>
@@ -20,8 +24,17 @@
     </div>
   </div>
   <div class="card-body text-center">
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <%= link_to 'Edit Wheel', edit_wheel_path, class: 'btn btn-primary' %>
-    <%= link_to 'Preview Wheel', preview_wheel_path, target: "_blank", class: 'btn btn-dark' %>
+    <div class="row align-middle justify-content-center">
+      <div class="col-12 col-md-7 my-auto">
+        <h1>Current Prize Wheel</h1>
+        <p><b>Last updated:</b> <%= distance_of_time_in_words(Time.current, @wheel.updated_at) %> ago</p>
+        <%= link_to 'Edit Wheel', edit_wheel_path, class: 'btn btn-primary' %>
+        <%= link_to 'Preview Wheel', preview_wheel_path, target: "_blank", class: 'btn btn-dark' %>
+      </div>
+      <div class="col-12 col-md-5 my-4">
+        <div id="wheel-thumbnail-container"></div>
+      </div>
+    </div>
+
   </div>
 </div>

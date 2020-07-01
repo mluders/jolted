@@ -1,7 +1,7 @@
 class WheelSegment < ApplicationRecord
   enum outcome: { winning: 'winning', losing: 'losing' }
 
-  belongs_to :wheel
+  belongs_to :wheel, touch: true
 
   default_scope { order(:position) }
 
