@@ -215,7 +215,9 @@ export default class App extends React.Component {
             {
               wheelData &&
               <Wheel
-                wheelData={wheelData}
+                wheelBaseColor={wheelData.wheelBaseColor}
+                colorizeWheel={wheelData.colorizeWheel}
+                segments={wheelData.segments}
                 onCreateWheel={this.onCreateWheel}
                 afterSpinWheel={this.afterSpinWheel}
               />

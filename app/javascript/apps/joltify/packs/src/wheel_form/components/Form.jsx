@@ -22,6 +22,7 @@ export default function Form(props) {
       />
 
       <Branding
+        wheel={wheel}
         changeWheel={changeWheel}
         popupBackgroundColor={wheel.popupBackgroundColor}
         popupFontColor={wheel.popupFontColor}

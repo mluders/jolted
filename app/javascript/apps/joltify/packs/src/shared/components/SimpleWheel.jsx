@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { adjustColor } from '../../shared/color_utils';
-import './wheel.css';
+import { adjustColor } from '../color_utils';
+import './simple_wheel.css';
 
-export default class Wheel extends React.Component {
+export default class SimpleWheel extends React.Component {
   DEFAULT_SEGMENT_COLORS = [
     '#2914db',
     '#ff0160',
@@ -18,13 +18,16 @@ export default class Wheel extends React.Component {
         label: PropTypes.string.isRequired
       })
     ).isRequired,
+    backgroundColor: PropTypes.string.isRequired,
     wheelBaseColor: PropTypes.string.isRequired,
-    colorizeWheel: PropTypes.bool.isRequired,
-    onCreateWheel: PropTypes.func,
-    afterSpinWheel: PropTypes.func
+    colorizeWheel: PropTypes.bool.isRequired
   }
 
   componentDidMount() {
+    this.createWheel();
+  }
+
+  componentDidUpdate() {
     this.createWheel();
   }
 
@@ -58,14 +61,14 @@ export default class Wheel extends React.Component {
       return ({
         'fillStyle': color,
         'strokeStyle': color,
-        'textFillStyle': '#ffffff',
-        'text': s.label
+        'textFillStyle': '#ffffff'
       });
     });
   }
 
   createWheel = () => {
-    const { segments, onCreateWheel, afterSpinWheel } = this.props;
+    console.log('re-creating wheel');
+    const { segments } = this.props;
 
     const innerWheel = new Winwheel({
       'canvasId'     : 'wheel-canvas',
@@ -75,18 +78,6 @@ export default class Wheel extends React.Component {
       'textFontSize' : 48,
       'lineWidth'    : 1,
       'segments'     : this.generateInnerSegments(),
-      'animation'    : {
-        'type'     : 'spinToStop',
-        'duration' : 10,
-        'spins'    : 16,
-        'callbackBefore': () => {
-          drawShadow();
-        },
-        'callbackAfter': () => {
-          drawPointer();
-        },
-        'callbackFinished': afterSpinWheel
-      }
     });
 
     const drawShadow = () => {
@@ -135,13 +126,13 @@ export default class Wheel extends React.Component {
     drawShadow();
     innerWheel.draw(false);
     drawPointer();
-
-    if (onCreateWheel) onCreateWheel(innerWheel);
   };
 
   render() {
+    const { backgroundColor } = this.props;
+
     return (
-      <div>
+      <div className="text-center" style={{ backgroundColor: backgroundColor }}>
         <canvas id="wheel-canvas" className="wheel-canvas" width="1500" height="1500">
           Canvas not supported, use another browser.
         </canvas>

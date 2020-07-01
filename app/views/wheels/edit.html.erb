@@ -2,5 +2,7 @@
   wheel: @wheel.as_json(include: :wheel_segments)
 }) %>
 
+<script><%= render 'proxy/frames/winwheel.min.js' %></script>
+
 <div id="wheel-form-container"></div>
 <%= javascript_pack_tag 'wheel_form' %>
