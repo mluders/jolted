@@ -2,8 +2,5 @@
 
 class AuthenticatedController < ApplicationController
   include ShopifyApp::Authenticated
-
-  def current_shop
-    Shop.find(session[:shop_id])
-  end
+  include AuthHelpers
 end

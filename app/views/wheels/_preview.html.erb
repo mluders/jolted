@@ -1,5 +1,5 @@
 <script><%= render 'proxy/frames/winwheel.min.js' %></script>
-<div id="pack-data" data-wheel="<%= @wheel.to_json(include: :wheel_segments) %>"></div>
+<div id="pack-data" data-wheel="<%= @wheel.to_json(include: :wheel_segments) %>"></div><!-- TODO: Move this serialization somewhere else -->
 <%= javascript_pack_tag 'wheel_thumbnail' %>
 
 <div class="card <%= @wheel.live ? 'border-warning' : '' %>  mb-4">

@@ -1,13 +1,12 @@
 module API
   class WheelsController < API::BaseController
     def edit
-      current_shop = Shop.first # TODO: change me
       wheel = Wheel.find_by(shop: current_shop) || WheelService.new_wheel(shop: current_shop)
       render json: { wheel: wheel_as_json(wheel) } # TODO: render only necessary fields
     end
 
     def update
-      wheel = Wheel.find_or_initialize_by(shop: Shop.first) # TODO: Get shop from API token
+      wheel = Wheel.find_or_initialize_by(shop: current_shop)
       wheel.assign_attributes(update_params)
   
       if wheel.save
