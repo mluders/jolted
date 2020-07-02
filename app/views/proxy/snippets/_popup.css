@@ -1,4 +1,4 @@
-#joltify-popup-background {
+#howdyfox-popup-background {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,12 +10,12 @@
   transition: all 2s ease-in-out; /*make it smooth*/
 }
 
-#joltify-popup-background.open {
+#howdyfox-popup-background.open {
   display: block;
   background-color: rgb(0,0,0,0.7);
 }
 
-#main-joltify-popup {
+#main-howdyfox-popup {
   height: 100%;
   width: 100%;
   top: 0;
@@ -30,7 +30,7 @@
   box-shadow: none;
 }
 
-#main-joltify-popup.open {
+#main-howdyfox-popup.open {
   left: 0;
   -webkit-box-shadow: 6px 0px 20px -5px rgba(0,0,0,0.68);
   -moz-box-shadow: 6px 0px 20px -5px rgba(0,0,0,0.68);
@@ -38,13 +38,13 @@
 }
 
 @media (min-width: 1024px) {
-  #main-joltify-popup {
+  #main-howdyfox-popup {
     width: 75%;
     left: -75%;
   }
 }
 
-.main-joltify-popup iframe {
+.main-howdyfox-popup iframe {
   position: fixed;
   width: 100%;
   height: 100%;

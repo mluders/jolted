@@ -2,9 +2,9 @@
 
 default: &default
   source_path: app/javascript
-  source_entry_path: apps/joltify/packs
+  source_entry_path: apps/howdyfox/packs
   public_root_path: public
-  public_output_path: apps/joltify/packs
+  public_output_path: apps/howdyfox/packs
   cache_path: tmp/cache/webpacker
   check_yarn_integrity: false
   webpack_compile_output: true

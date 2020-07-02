@@ -1,7 +1,7 @@
 Rails.application.config.shopify = { api_version: '2020-04' }
 
 ShopifyApp.configure do |config|
-  config.application_name = 'Joltify'
+  config.application_name = 'HowdyFox'
   config.api_key = Rails.application.credentials.shopify[:api_key]
   config.secret = Rails.application.credentials.shopify[:api_secret]
   config.old_secret = ''

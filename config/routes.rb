@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resource :wheel, only: [:edit, :update]
   end
 
-  namespace :proxy, path: '/apps/joltify' do
+  namespace :proxy, path: '/apps/howdyfox' do
     resources :shops, only: :none do
       resource :snippet, only: [:show]
       resource :frame, only: [:show]

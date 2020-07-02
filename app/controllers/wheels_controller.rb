@@ -8,7 +8,7 @@ class WheelsController < AuthenticatedController
   end
 
   def preview
-    redirect_to "#{format_https(current_shop.shopify_domain)}?joltify_preview=true"
+    redirect_to "#{format_https(current_shop.shopify_domain)}?howdyfox_preview=true"
   end
 
   def destroy

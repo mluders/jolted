@@ -1,24 +1,24 @@
 function openNav() {
-  document.getElementById('main-joltify-popup').classList.add('open');
-  document.getElementById('joltify-popup-background').classList.add('open');
+  document.getElementById('main-howdyfox-popup').classList.add('open');
+  document.getElementById('howdyfox-popup-background').classList.add('open');
 
   document.body.style.overflow = 'hidden';
 }
 
 function closeNav() {
-  document.getElementById('main-joltify-popup').classList.remove('open');
-  document.getElementById('joltify-popup-background').classList.remove('open');
+  document.getElementById('main-howdyfox-popup').classList.remove('open');
+  document.getElementById('howdyfox-popup-background').classList.remove('open');
   document.body.style.overflow = 'visible';
 }
 
 function closePopup() {
   closeNav();
-  document.getElementById('joltify-popup-tab').style.display = 'none';
+  document.getElementById('howdyfox-popup-tab').style.display = 'none';
 }
 
 function checkPreviewMode() {
   const urlParams = new URLSearchParams(window.location.search);
-  const isPreview = urlParams.get('joltify_preview') === 'true';
+  const isPreview = urlParams.get('howdyfox_preview') === 'true';
   return isPreview;
 }
 
@@ -29,20 +29,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const popup = document.createElement('div');
   popup.innerHTML = `<%= render 'popup' %>`;
-  popup.innerHTML = popup.innerHTML.replace('joltify_preview=false', `joltify_preview=${preview}`);
+  popup.innerHTML = popup.innerHTML.replace('howdyfox_preview=false', `howdyfox_preview=${preview}`);
   document.body.insertBefore(popup, document.body.firstChild);
 });
 
 // Setup iframe event listeners
 
 if (window.addEventListener) {
-    window.addEventListener("message", onJoltifyMessage, false);
+    window.addEventListener("message", onHowdyFoxMessage, false);
 } 
 else if (window.attachEvent) {
-    window.attachEvent("onmessage", onJoltifyMessage, false);
+    window.attachEvent("onmessage", onHowdyFoxMessage, false);
 }
 
-function onJoltifyMessage(event) {
+function onHowdyFoxMessage(event) {
   if (event.data.message === 'CLOSE_POPUP') {
     closePopup();
   }
