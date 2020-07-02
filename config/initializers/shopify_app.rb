@@ -7,7 +7,7 @@ ShopifyApp.configure do |config|
   config.old_secret = ''
   
   # https://help.shopify.com/en/api/getting-started/authentication/oauth/scopes
-  config.scope = 'read_products, read_price_rules, write_price_rules, read_discounts, write_discounts'
+  config.scope = 'read_script_tags, write_script_tags, read_price_rules, write_price_rules, read_discounts, write_discounts'
 
   config.embedded_app = false
   config.after_authenticate_job = false
