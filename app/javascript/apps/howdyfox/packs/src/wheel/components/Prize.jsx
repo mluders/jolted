@@ -13,7 +13,7 @@ export default class Prize extends React.Component {
 
     return(
       <div>
-        <h1>You've hit <b>{prizeLabel}</b>. Woohoo!</h1>
+        <h1 className="popup-header">You've hit <b>{prizeLabel}</b>. Woohoo!</h1>
         <p>Don't forget to use the coupon at checkout.</p>
         <div className='form-group'>
           <input className="form-control" value={prizeValue} readOnly></input>

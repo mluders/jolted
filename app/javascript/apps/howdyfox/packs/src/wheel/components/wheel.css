@@ -23,6 +23,10 @@
   text-align: center;
 }
 
+.popup-header {
+  font-size: 2rem;
+}
+
 @media (min-aspect-ratio: 4/3) {
   .custom-flex {
     flex-direction: row;
@@ -44,5 +48,9 @@
     left: -30vh;
     top: 0;
     transform: rotate(90deg);
+  }
+
+  .popup-header {
+    font-size: 2.5rem;
   }
 }
