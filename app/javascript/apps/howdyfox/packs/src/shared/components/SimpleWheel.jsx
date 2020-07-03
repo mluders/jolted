@@ -129,14 +129,15 @@ export default class SimpleWheel extends React.Component {
   };
 
   render() {
-    const { backgroundColor } = this.props;
+    const { text, children, backgroundColor } = this.props;
 
     return (
       <div className="text-center" style={{ backgroundColor: backgroundColor }}>
         <canvas id="wheel-canvas" className="wheel-canvas" width="1500" height="1500">
           Canvas not supported, use another browser.
         </canvas>
+        {children}
       </div>
-    );
+  );
   }
 }

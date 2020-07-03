@@ -1,7 +1,7 @@
 import React from 'react'
 import ActionBar from './ActionBar';
 import General from './General';
-import Branding from './Branding';
+import Appearance from './Appearance';
 import DiscountSettings from './DiscountSettings';
 import SegmentTable from './SegmentTable';
 
@@ -21,7 +21,7 @@ export default function Form(props) {
         changeWheel={changeWheel}
       />
 
-      <Branding
+      <Appearance
         wheel={wheel}
         changeWheel={changeWheel}
         popupBackgroundColor={wheel.popupBackgroundColor}
