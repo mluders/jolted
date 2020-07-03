@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   namespace :proxy, path: '/apps/howdyfox' do
     resources :shops, only: :none do
-      resource :snippet, only: [:show]
+      get 'snippet.js', to: 'snippets#show', as: :snippet
       resource :frame, only: [:show]
       resource :wheel, only: [:show]
       resources :discount_codes, only: [:create]

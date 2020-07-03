@@ -5,7 +5,7 @@ class ShopifyAPIService
   SHOPIFY_API_VERSION = Rails.application.config.shopify[:api_version]
 
   def initialize(shop:)
-    ::ShopifyAPI::Session.setup(api_key: SHOPIFY_API_KEY, secret: SHOPIFY_API_SECRET)
+    ShopifyAPI::Session.setup(api_key: SHOPIFY_API_KEY, secret: SHOPIFY_API_SECRET)
     session = ::ShopifyAPI::Session.new(
       api_version: SHOPIFY_API_VERSION,
       domain: shop.shopify_domain,
@@ -34,5 +34,14 @@ class ShopifyAPIService
     discount_code.save
 
     [price_rule, discount_code]
+  end
+
+  def list_all_script_tags
+    ShopifyAPI::ScriptTag.all
+  end
+
+  def upsert_script_tag(src:, event: 'onload')
+    tag = ShopifyAPI::ScriptTag.where(src: src).first
+    ShopifyAPI::ScriptTag.create!(src: src, event: event) if tag.blank?
   end
 end

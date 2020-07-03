@@ -10,6 +10,7 @@ module API
       wheel.assign_attributes(update_params)
   
       if wheel.save
+        ScriptTagService.setup_snippet_script_tag(shop: current_shop) # TODO: Find a better spot for this
         render json: { message: 'Wheel was saved successfully' }
       else
         render json: { wheel: wheel_as_json(wheel) }, status: :unprocessable_entity
