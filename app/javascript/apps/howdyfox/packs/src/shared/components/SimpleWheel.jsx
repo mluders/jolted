@@ -67,7 +67,6 @@ export default class SimpleWheel extends React.Component {
   }
 
   createWheel = () => {
-    console.log('re-creating wheel');
     const { segments } = this.props;
 
     const innerWheel = new Winwheel({

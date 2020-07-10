@@ -10,9 +10,9 @@ export default function SegmentTable(props) {
 
   const segmentComponents = () => {
     const { isSubmitting, wheel, changeSegment } = props;
-    const totalGravity = wheel.wheelSegments.map((segment) => parseInt(segment.gravity)).reduce((a, b) => a + b);
+    const totalGravity = wheel['wheel_segments'].map((segment) => parseInt(segment['gravity'])).reduce((a, b) => a + b);
 
-    return wheel.wheelSegments.map((segment, index) => {  
+    return wheel['wheel_segments'].map((segment, index) => {
       return (
         <tr key={index} className="px-5">
           <th scope="row" className="pt-3">{index + 1}</th>
@@ -28,12 +28,12 @@ export default function SegmentTable(props) {
 
           <td>
             {
-              segment.outcome == 'winning' &&
+              segment['outcome'] == 'winning' &&
               <SegmentDiscount
                 isSubmitting={isSubmitting}
                 segment={segment}
                 segmentIndex={index}
-                useDynamicDiscountCodes={wheel.useDynamicDiscountCodes}
+                useDynamicDiscountCodes={wheel['use_dynamic_discount_codes']}
                 changeSegment={changeSegment}
               />
             }
@@ -41,12 +41,12 @@ export default function SegmentTable(props) {
 
           <td>
             {
-              segment.outcome == 'winning' &&
+              segment['outcome'] == 'winning' &&
               <span>
                 <select
                   className="form-select"
                   style={{ minWidth: '100px' }}
-                  value={segment.gravity}
+                  value={segment['gravity']}
                   onChange={(e) => changeSegment(index, 'gravity', e.target.value)}
                 >
                   <option>0</option>
@@ -66,7 +66,7 @@ export default function SegmentTable(props) {
           </td>
 
           <td className="pt-3">
-            {segment.outcome == 'winning' && toPercentage(segment.gravity / totalGravity)}
+            {segment['outcome'] == 'winning' && toPercentage(segment['gravity'] / totalGravity)}
           </td>
         </tr>
       );
@@ -81,7 +81,7 @@ export default function SegmentTable(props) {
             <tr>
               <th scope="col"></th>
               <th scope="col" style={{width: '200px !important'}}>Label</th>
-              <th scope="col">{props.wheel.useDynamicDiscountCodes ? 'Discount' : 'Raw Discount Code'}</th>
+              <th scope="col">{props.wheel['use_dynamic_discount_codes'] ? 'Discount' : 'Raw Discount Code'}</th>
               <th scope="col">Gravity</th>
               <th scope="col">Likelihood</th>
             </tr>

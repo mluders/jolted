@@ -2,7 +2,12 @@ module API
   class WheelsController < API::BaseController
     def edit
       wheel = Wheel.find_by(shop: current_shop) || WheelService.new_wheel(shop: current_shop)
-      render json: { wheel: wheel_as_json(wheel) } # TODO: render only necessary fields
+      image_upload_url, image_upload_url_fields = s3_direct_post
+      render json: {
+        wheel: wheel_as_json(wheel),
+        image_upload_url: image_upload_url,
+        image_upload_url_fields: image_upload_url_fields
+      } # TODO: render only necessary fields
     end
 
     def update
@@ -18,6 +23,17 @@ module API
     end
   
     private
+
+    def s3_direct_post
+      post = S3_USER_UPLOAD_BUCKET.presigned_post(
+        key: "#{current_shop.shopify_domain}/#{SecureRandom.uuid}-${filename}",
+        success_action_status: '201',
+        acl: 'public-read',
+        content_type_starts_with: 'image/'
+      )
+
+      [post.url, post.fields]
+    end
   
     def update_params
       params.require(:wheel).permit(
@@ -27,6 +43,7 @@ module API
         :popup_accent_color,
         :wheel_base_color,
         :colorize_wheel,
+        :background_image_url,
         :use_dynamic_discount_codes,
         :discount_duration,
         wheel_segments_attributes: [

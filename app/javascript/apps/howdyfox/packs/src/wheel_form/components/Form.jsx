@@ -11,24 +11,27 @@ export default function Form(props) {
     wheel,
     changeWheel,
     changeSegment,
+    uploadImage,
     onSave
   } = props;
 
   return (
     <div>
       <General
-        live={wheel.live}
+        live={wheel['live']}
         changeWheel={changeWheel}
       />
 
       <Appearance
         wheel={wheel}
         changeWheel={changeWheel}
-        popupBackgroundColor={wheel.popupBackgroundColor}
-        popupFontColor={wheel.popupFontColor}
-        popupAccentColor={wheel.popupAccentColor}
-        wheelBaseColor={wheel.wheelBaseColor}
-        colorizeWheel={wheel.colorizeWheel}
+        uploadImage={uploadImage}
+        popupBackgroundColor={wheel['popup_background_color']}
+        popupFontColor={wheel['popup_font_color']}
+        popupAccentColor={wheel['popup_accent_color']}
+        wheelBaseColor={wheel['wheel_base_color']}
+        colorizeWheel={wheel['colorize_wheel']}
+        backgroundImageUrl={wheel['background_image_url']}
       />
 
       <DiscountSettings

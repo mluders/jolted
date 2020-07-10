@@ -1,11 +1,5 @@
 export async function getWheel() {
-  const response = await fetch('/api/wheel/edit', {
-    headers: {
-      'Key-Inflection': 'camel',
-      'Content-Type': 'application/json'
-    }
-  });
-
+  const response = await fetch('/api/wheel/edit');
   const json = await response.json();
   return [response.status, json]
 }
@@ -13,31 +7,32 @@ export async function getWheel() {
 export async function updateWheel(wheelData) {
   const {
     live,
-    popupBackgroundColor,
-    popupFontColor,
-    popupAccentColor,
-    wheelBaseColor,
-    colorizeWheel,
-    useDynamicDiscountCodes,
-    discountDuration
+    popup_background_color,
+    popup_font_color,
+    popup_accent_color,
+    wheel_base_color,
+    colorize_wheel,
+    background_image_url,
+    use_dynamic_discount_codes,
+    discount_duration
   } = wheelData;
 
   const response = await fetch('/api/wheel', {
     method: 'PUT',
     headers: {
-      'Key-Inflection': 'camel',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
       live,
-      popupBackgroundColor,
-      popupFontColor,
-      popupAccentColor,
-      wheelBaseColor,
-      colorizeWheel,
-      useDynamicDiscountCodes,
-      discountDuration,
-      wheelSegmentsAttributes: wheelData.wheelSegments
+      popup_background_color,
+      popup_font_color,
+      popup_accent_color,
+      wheel_base_color,
+      colorize_wheel,
+      background_image_url,
+      use_dynamic_discount_codes,
+      discount_duration,
+      wheel_segments_attributes: wheelData.wheel_segments
     })
   });
 

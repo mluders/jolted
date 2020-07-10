@@ -1,0 +1,10 @@
+.fileContainer {
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  align-items: stretch;
+}
+
+.fileContainer > .chooseFileButton {
+  margin-bottom: 0 !important;
+}

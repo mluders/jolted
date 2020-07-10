@@ -15,9 +15,11 @@
     "react": "^16.13.1",
     "react-color": "^2.18.1",
     "react-dom": "^16.13.1",
+    "react-images-upload": "^1.2.8",
     "react-spring": "^8.0.27",
     "reactcss": "^1.2.3",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "xml2js": "^0.4.23"
   },
   "version": "0.1.0",
   "devDependencies": {

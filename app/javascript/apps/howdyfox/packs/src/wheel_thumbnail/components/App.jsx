@@ -3,7 +3,6 @@ import SimpleWheel from '../../shared/components/SimpleWheel';
 
 export default function App(props) {
   const { wheel } = props;
-  console.log(wheel);
 
   return (
     <SimpleWheel

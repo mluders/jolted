@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_26_213446) do
+ActiveRecord::Schema.define(version: 2020_07_10_165005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -72,6 +72,8 @@ ActiveRecord::Schema.define(version: 2020_06_26_213446) do
     t.string "wheel_base_color", default: "#ff7675", null: false
     t.boolean "colorize_wheel", default: false, null: false
     t.boolean "live", default: false, null: false
+    t.string "background_image_url"
+    t.string "small_logo_image_url"
     t.index ["shop_id"], name: "index_wheels_on_shop_id"
   end
 

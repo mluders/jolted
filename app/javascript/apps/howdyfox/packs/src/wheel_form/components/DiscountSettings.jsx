@@ -3,8 +3,9 @@ import Card from './Card';
 
 export default function DiscountSettings(props) {
   const { isSubmitting, wheel, changeWheel } = props;
-  const { useDynamicDiscountCodes, discountDuration } = wheel;
-  const { discountDuration: discountDurationErrors } = wheel.errors;
+  const useDynamicDiscountCodes = wheel['use_dynamic_discount_codes'];
+  const discountDuration = wheel['discount_duration'];
+  const discountDurationErrors = wheel['errors']['discount_duration']
   const discountDurationError = (
     !isSubmitting && discountDurationErrors && discountDurationErrors.length > 0 ?
     discountDurationErrors[0] : null
@@ -23,11 +24,11 @@ export default function DiscountSettings(props) {
   }
 
   const toggleDynamicDiscountCodes = () => {
-    changeWheel('useDynamicDiscountCodes', !useDynamicDiscountCodes);
+    changeWheel('use_dynamic_discount_codes', !useDynamicDiscountCodes);
   };
 
   const handleDiscountDurationChange = (e) => {
-    changeWheel('discountDuration', e.target.value);
+    changeWheel('discount_duration', e.target.value);
   }
 
   return (
