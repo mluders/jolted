@@ -6,10 +6,11 @@ export default function App(props) {
 
   return (
     <SimpleWheel
-      segments={wheel.wheel_segments}
-      backgroundColor={wheel.popup_background_color}
-      wheelBaseColor={wheel.wheel_base_color}
-      colorizeWheel={wheel.colorize_wheel}
+      segments={wheel['wheel_segments']}
+      backgroundColor={wheel['popup_background_color']}
+      wheelBaseColor={wheel['wheel_base_color']}
+      colorizeWheel={wheel['colorize_wheel']}
+      backgroundImageUrl={wheel['background_image_url']}
     />
   );
 }

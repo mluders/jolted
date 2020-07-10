@@ -155,6 +155,7 @@ export default function Appearance(props) {
             backgroundColor={popupBackgroundColor}
             wheelBaseColor={wheelBaseColor}
             colorizeWheel={colorizeWheel}
+            backgroundImageUrl={backgroundImageUrl}
           >
             <h1 className="mb-3" style={textStyle}>Example Text</h1>
             <button className="btn btn-primary mb-3" style={buttonStyle}>Example Button</button>

@@ -20,7 +20,8 @@ export default class SimpleWheel extends React.Component {
     ).isRequired,
     backgroundColor: PropTypes.string.isRequired,
     wheelBaseColor: PropTypes.string.isRequired,
-    colorizeWheel: PropTypes.bool.isRequired
+    colorizeWheel: PropTypes.bool.isRequired,
+    backgroundImageUrl: PropTypes.string
   }
 
   componentDidMount() {
@@ -128,10 +129,17 @@ export default class SimpleWheel extends React.Component {
   };
 
   render() {
-    const { text, children, backgroundColor } = this.props;
+    const { children, backgroundColor, backgroundImageUrl } = this.props;
+    const wrapperStyle = {
+      backgroundColor,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    };
+
+    if (backgroundImageUrl) wrapperStyle['backgroundImage'] = `url(${backgroundImageUrl})`;
 
     return (
-      <div className="text-center" style={{ backgroundColor: backgroundColor }}>
+      <div className="text-center" style={wrapperStyle}>
         <canvas id="wheel-canvas" className="wheel-canvas" width="1500" height="1500">
           Canvas not supported, use another browser.
         </canvas>
