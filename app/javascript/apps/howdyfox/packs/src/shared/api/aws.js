@@ -10,9 +10,6 @@ export async function directUploadToS3(file, presigned_url, presigned_url_fields
 
   const response = await fetch(presigned_url, {
     method: 'POST',
-    headers: {
-      "origin": 'http://howdyfox.ngrok.io',
-    },
     body: formData
   });
 
