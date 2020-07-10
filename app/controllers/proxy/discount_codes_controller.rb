@@ -8,7 +8,7 @@ module Proxy
       email = params.require(:email)
       is_preview = params.require(:is_preview)
 
-      return active_discount_code_error if DiscountCodeService.active_discount_code?(wheel: wheel, email: email)
+      return active_discount_code_error if is_preview == false && DiscountCodeService.active_discount_code?(wheel: wheel, email: email)
 
       segment_index = wheel.random_segment_index
       segment = wheel.wheel_segments[segment_index]
