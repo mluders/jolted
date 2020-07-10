@@ -62,7 +62,7 @@ export default class Form extends React.Component {
     return (
       <div>
         <form>
-          <h1 className="popup-header">Spin the wheel.</h1>
+          <h1 className="popup-header-text">Spin the wheel.</h1>
           <p>Win an exclusive coupon code to our shop.</p>
           <div className='form-group'>
             <input

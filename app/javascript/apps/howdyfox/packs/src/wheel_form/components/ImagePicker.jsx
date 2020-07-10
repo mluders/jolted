@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import ImageUploader from 'react-images-upload';
 import Spinner from './Spinner';
-import './image_picker.css';
 
 const imageStyle = {
   maxWidth: '256px',
   maxHeight: '64px'
-}
+};
+
+const fileContainerStyle = {
+  boxShadow: 'none',
+  margin: 0,
+  padding: 0,
+  alignItems: 'stretch'
+};
 
 const buttonStyle = {
   color: '#212529',
@@ -24,7 +30,7 @@ const buttonStyle = {
   textDecoration: 'none',
   cursor: 'pointer',
   transition: 'color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out'
-}
+};
 
 const VALID_FILE_EXTENSIONS = ['.jpg', '.jpeg', '.png'];
 
@@ -63,12 +69,13 @@ export default function ImagePicker(props) {
           singleImage={true}
           withIcon={true}
           buttonText="Choose image"
-          buttonStyles={buttonStyle}
           onChange={onDrop}
           imgExtension={VALID_FILE_EXTENSIONS}
           maxFileSize={maxFileSize}
           withIcon={false}
           withLabel={false}
+          fileContainerStyle={fileContainerStyle}
+          buttonStyles={buttonStyle}
         />
         <small className="text-muted">
           Max {formatBytes(maxFileSize)} ({VALID_FILE_EXTENSIONS.join(', ')})

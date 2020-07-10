@@ -207,7 +207,7 @@ export default class App extends React.Component {
       <div>
         {isPreview && <PreviewBadge />}
         <CloseButton onClick={this.closePopup} />
-        <div className="custom-flex">
+        <div className="wheel-flex-container">
           <div className="wheel-column">
             {
               wheelData &&

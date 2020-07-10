@@ -1,0 +1,99 @@
+body {
+  background-color: transparent;
+  color: <%= @wheel.popup_font_color %>;
+}
+
+b {
+  color: <%= @wheel.popup_accent_color %>;
+}
+
+.form-control {
+  border-color: <%= @wheel.popup_accent_color %>;
+}
+
+input:focus, input:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.btn-primary {
+  color: white !important;
+  background-color: <%= @wheel.popup_accent_color %> !important;
+  border-color: <%= @wheel.popup_accent_color %> !important;
+}
+
+.btn:focus,.btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.x-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 36px;
+  height: 36px;
+  color: <%= @wheel.popup_font_color %>;
+}
+
+.simple-wheel-canvas {
+  width: 70%;
+  transform: rotate(90deg);
+}
+
+.wheel-canvas {
+  width: 50vh;
+  transform: rotate(90deg);
+}
+
+.wheel-flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.wheel-flex-container .wheel-column {
+  flex: 0 0 50%;
+  align-items: center;
+  text-align: center;
+}
+
+.wheel-flex-container .form-column {
+  flex: 0 0 50%;
+  padding: 0 45px 10px 45px;
+  text-align: center;
+}
+
+.popup-header-text {
+  font-size: 2rem;
+}
+
+@media (min-aspect-ratio: 4/3) {
+  .wheel-canvas {
+    width: 100vh;
+    position: fixed;
+    left: -30vh;
+    top: 0;
+    transform: rotate(90deg);
+  }
+
+  .wheel-flex-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .wheel-flex-container .wheel-column {
+    flex: 0 0 50%;
+  }
+
+  .wheel-flex-container .form-column {
+    flex: 0 0 50%;
+    padding: 45px;
+  }
+
+  .popup-header-text {
+    font-size: 2.5rem;
+  }
+}

@@ -1,43 +1,5 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<style>
-  body {
-    background-color: transparent;
-    color: <%= @wheel.popup_font_color %>;
-  }
-
-  b {
-    color: <%= @wheel.popup_accent_color %>;
-  }
-
-  .form-control {
-    border-color: <%= @wheel.popup_accent_color %>;
-  }
-
-  input:focus, input:active {
-    outline: none !important;
-    box-shadow: none !important;
-  }
-
-  .btn-primary {
-    color: white !important;
-    background-color: <%= @wheel.popup_accent_color %> !important;
-    border-color: <%= @wheel.popup_accent_color %> !important;
-  }
-
-  .btn:focus,.btn:active {
-    outline: none !important;
-    box-shadow: none !important;
-  }
-
-  .x-icon {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 36px;
-    height: 36px;
-    color: <%= @wheel.popup_font_color %>;
-  }
-</style>
+<style><%= render 'show.css' %></style>
 
 <script><%= render 'tweenmax.min.js' %></script>
 <script><%= render 'winwheel.min.js' %></script>

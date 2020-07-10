@@ -2,6 +2,11 @@
   background: rgba(0,0,0,.03)
  }
 
- .btn-light {
-   background-color: #eeeeee;
- }
+.btn-light {
+  background-color: #eeeeee;
+}
+
+.simple-wheel-canvas {
+  width: 70%;
+  transform: rotate(90deg);
+}

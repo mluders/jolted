@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { adjustColor } from '../../shared/color_utils';
-import './wheel.css';
 
 export default class Wheel extends React.Component {
   DEFAULT_SEGMENT_COLORS = [

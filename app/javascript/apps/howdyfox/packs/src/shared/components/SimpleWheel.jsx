@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { adjustColor } from '../color_utils';
-import './simple_wheel.css';
 
 export default class SimpleWheel extends React.Component {
   DEFAULT_SEGMENT_COLORS = [
@@ -66,7 +65,7 @@ export default class SimpleWheel extends React.Component {
     const { segments } = this.props;
 
     const innerWheel = new Winwheel({
-      'canvasId'     : 'wheel-canvas',
+      'canvasId'     : 'simple-wheel-canvas',
       'numSegments'  : segments.length,
       'outerRadius'  : this.WHEEL_RADIUS - 40,
       'innerRadius'  : 100,
@@ -76,7 +75,7 @@ export default class SimpleWheel extends React.Component {
     });
 
     const drawShadow = () => {
-      const canvas = document.getElementById('wheel-canvas');
+      const canvas = document.getElementById('simple-wheel-canvas');
       let ctx = canvas.getContext('2d');
 
       if (!ctx) return;
@@ -96,7 +95,7 @@ export default class SimpleWheel extends React.Component {
 
     const drawPointer = () =>
     {
-      const canvas = document.getElementById('wheel-canvas');
+      const canvas = document.getElementById('simple-wheel-canvas');
       let ctx = canvas.getContext('2d');
 
       if (!ctx) return;
@@ -135,7 +134,7 @@ export default class SimpleWheel extends React.Component {
 
     return (
       <div className="text-center" style={wrapperStyle}>
-        <canvas id="wheel-canvas" className="wheel-canvas" width="1500" height="1500">
+        <canvas id="simple-wheel-canvas" className="simple-wheel-canvas" width="1500" height="1500">
           Canvas not supported, use another browser.
         </canvas>
         {children}
