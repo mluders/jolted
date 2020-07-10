@@ -7,6 +7,7 @@ export const StoreContext = React.createContext();
 export const StoreProvider = ({ children }) => {
   const store = useLocalStore(() => ({
     isSubmitting: false,
+    generalError: null,
     wheel: null,
     imageUploadUrl: null,
     imageUploadUrlFields: null,

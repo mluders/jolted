@@ -6,4 +6,4 @@ Aws.config.update({
   ),
 })
 
-S3_USER_UPLOAD_BUCKET = Aws::S3::Resource.new.bucket(ENV['S3_USER_UPLOAD_BUCKET'])
+S3_USER_UPLOAD_BUCKET = Aws::S3::Resource.new.bucket(ENV.fetch('S3_USER_UPLOAD_BUCKET'))

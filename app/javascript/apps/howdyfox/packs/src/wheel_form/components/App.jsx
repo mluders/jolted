@@ -24,27 +24,32 @@ export default function App() {
 
   const onSave = async () => {
     store.isSubmitting = true;
+    store.generalError = null;
     const [status, data] = await updateWheel(store.wheel);
 
     if (status == 200) {
       window.location.href = '/';
-    } else {
+    } else if (status == 422) {
       store.isSubmitting = false;
       const { wheel } = data;
       store.wheel = wheel;
-      scrollToError();
+      scrollToClass('is-invalid');
+    } else {
+      store.isSubmitting = false;
+      store.generalError = "Something went wrong when creating your wheel. Please contact support@howdyfox.com";
+      scrollToClass('general-error');
     }
   }
 
-  function scrollToError() {
-    const items = document.getElementsByClassName('is-invalid');
+  function scrollToClass(className) {
+    const items = document.getElementsByClassName(className);
     if (items.length > 0) {
       items[0].scrollIntoView();
     }
   }
 
   return useObserver(() => {
-    const { isSubmitting, wheel, changeWheel, changeSegment, uploadImage } = store;
+    const { isSubmitting, generalError, wheel, changeWheel, changeSegment, uploadImage } = store;
 
     return (
       <div>
@@ -54,6 +59,7 @@ export default function App() {
           wheel &&
           <Form
             isSubmitting={isSubmitting}
+            generalError={generalError}
             wheel={wheel}
             changeWheel={changeWheel}
             changeSegment={changeSegment}

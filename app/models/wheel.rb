@@ -7,6 +7,9 @@ class Wheel < ApplicationRecord
   has_many :wheel_segments, dependent: :destroy
   accepts_nested_attributes_for :wheel_segments
 
+  has_many :discount_codes, dependent: :destroy
+  has_many :raw_discount_codes, dependent: :destroy
+
   validate :min_segments
   validates_associated :wheel_segments
   validate :discount_duration_exists

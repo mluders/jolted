@@ -8,6 +8,7 @@ import SegmentTable from './SegmentTable';
 export default function Form(props) {
   const {
     isSubmitting,
+    generalError,
     wheel,
     changeWheel,
     changeSegment,
@@ -17,6 +18,11 @@ export default function Form(props) {
 
   return (
     <div>
+      {
+        generalError &&
+        <div class="alert alert-danger general-error" role="alert">{generalError}</div>
+      }
+
       <General
         live={wheel['live']}
         changeWheel={changeWheel}

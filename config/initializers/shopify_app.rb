@@ -1,9 +1,7 @@
-Rails.application.config.shopify = { api_version: '2020-04' }
-
 ShopifyApp.configure do |config|
   config.application_name = 'HowdyFox'
-  config.api_key = Rails.application.credentials.shopify[:api_key]
-  config.secret = Rails.application.credentials.shopify[:api_secret]
+  config.api_key = ENV.fetch('SHOPIFY_API_KEY')
+  config.secret = ENV.fetch('SHOPIFY_SECRET')
   config.old_secret = ''
   
   # https://help.shopify.com/en/api/getting-started/authentication/oauth/scopes
@@ -11,7 +9,7 @@ ShopifyApp.configure do |config|
 
   config.embedded_app = false
   config.after_authenticate_job = false
-  config.api_version = Rails.application.config.shopify[:api_version]
+  config.api_version = '2020-04'
   config.shop_session_repository = 'Shop'
 end
 

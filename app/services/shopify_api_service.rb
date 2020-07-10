@@ -1,11 +1,11 @@
 class ShopifyAPIService
   APP_NAME = Rails.application.class.parent_name.downcase
-  SHOPIFY_API_KEY = Rails.application.credentials.shopify[:api_key]
-  SHOPIFY_API_SECRET = Rails.application.credentials.shopify[:api_secret]
-  SHOPIFY_API_VERSION = Rails.application.config.shopify[:api_version]
+  SHOPIFY_API_KEY = ShopifyApp.configuration.api_key
+  SHOPIFY_SECRET = ShopifyApp.configuration.secret
+  SHOPIFY_API_VERSION = ShopifyApp.configuration.api_version
 
   def initialize(shop:)
-    ShopifyAPI::Session.setup(api_key: SHOPIFY_API_KEY, secret: SHOPIFY_API_SECRET)
+    ShopifyAPI::Session.setup(api_key: SHOPIFY_API_KEY, secret: SHOPIFY_SECRET)
     session = ::ShopifyAPI::Session.new(
       api_version: SHOPIFY_API_VERSION,
       domain: shop.shopify_domain,

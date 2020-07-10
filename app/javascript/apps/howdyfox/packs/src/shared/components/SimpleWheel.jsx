@@ -13,11 +13,6 @@ export default class SimpleWheel extends React.Component {
   WHEEL_RADIUS = 670;
 
   static propTypes = {
-    segments: PropTypes.arrayOf(
-      PropTypes.shape({
-        label: PropTypes.string.isRequired
-      })
-    ).isRequired,
     backgroundColor: PropTypes.string.isRequired,
     wheelBaseColor: PropTypes.string.isRequired,
     colorizeWheel: PropTypes.bool.isRequired,

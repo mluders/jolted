@@ -14,12 +14,16 @@ module API
       wheel = Wheel.find_or_initialize_by(shop: current_shop)
       wheel.assign_attributes(update_params)
   
-      if wheel.save
-        ScriptTagService.setup_snippet_script_tag(shop: current_shop) # TODO: Find a better spot for this
-        render json: { message: 'Wheel was saved successfully' }
-      else
-        render json: { wheel: wheel_as_json(wheel) }, status: :unprocessable_entity
+      ActiveRecord::Base.transaction do
+        wheel.save!
+        ScriptTagService.setup_snippet_script_tag(shop: current_shop)
       end
+
+      render json: { message: 'Wheel was saved successfully' }
+    rescue StandardError => e
+      puts e # TODO: Log to Rollbar
+      status = wheel.valid? ? :internal_server_error : :unprocessable_entity
+      render json: { wheel: wheel_as_json(wheel) }, status: status
     end
   
     private
