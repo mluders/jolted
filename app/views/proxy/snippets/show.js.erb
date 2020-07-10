@@ -1,28 +1,44 @@
-function openNav() {
-  document.getElementById('main-howdyfox-popup').classList.add('open');
-  document.getElementById('howdyfox-popup-background').classList.add('open');
+(() => {
+  console.log('Loaded snippet');
 
-  document.body.style.overflow = 'hidden';
-}
+  function openPopup() {
+    document.getElementById('main-howdyfox-popup').classList.add('open');
+    document.getElementById('howdyfox-popup-background').classList.add('open');
 
-function closeNav() {
-  document.getElementById('main-howdyfox-popup').classList.remove('open');
-  document.getElementById('howdyfox-popup-background').classList.remove('open');
-  document.body.style.overflow = 'visible';
-}
+    document.body.style.overflow = 'hidden';
+  }
 
-function closePopup() {
-  closeNav();
-  document.getElementById('howdyfox-popup-tab').style.display = 'none';
-}
+  function closePopup() {
+    document.getElementById('main-howdyfox-popup').classList.remove('open');
+    document.getElementById('howdyfox-popup-background').classList.remove('open');
+    document.body.style.overflow = 'visible';
+    document.getElementById('howdyfox-popup-tab').style.display = 'none';
+  }
 
-function checkPreviewMode() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const isPreview = urlParams.get('howdyfox_preview') === 'true';
-  return isPreview;
-}
+  function checkPreviewMode() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const isPreview = urlParams.get('howdyfox_preview') === 'true';
+    return isPreview;
+  }
 
-document.addEventListener("DOMContentLoaded", () => {
+  if (window.addEventListener) {
+    window.addEventListener("message", onHowdyFoxMessage, false);
+  }
+
+  else if (window.attachEvent) {
+    window.attachEvent("onmessage", onHowdyFoxMessage, false);
+  }
+
+  function onHowdyFoxMessage(event) {
+    if (event.data.message === 'OPEN_POPUP') {
+      openPopup();
+    }
+
+    if (event.data.message === 'CLOSE_POPUP') {
+      closePopup();
+    }
+  }
+
   const live = <%= @wheel.live? %>;
   const preview = checkPreviewMode();
   if (!live && !preview) return;
@@ -31,19 +47,4 @@ document.addEventListener("DOMContentLoaded", () => {
   popup.innerHTML = `<%= render 'popup' %>`;
   popup.innerHTML = popup.innerHTML.replace('howdyfox_preview=false', `howdyfox_preview=${preview}`);
   document.body.insertBefore(popup, document.body.firstChild);
-});
-
-// Setup iframe event listeners
-
-if (window.addEventListener) {
-    window.addEventListener("message", onHowdyFoxMessage, false);
-} 
-else if (window.attachEvent) {
-    window.attachEvent("onmessage", onHowdyFoxMessage, false);
-}
-
-function onHowdyFoxMessage(event) {
-  if (event.data.message === 'CLOSE_POPUP') {
-    closePopup();
-  }
-}
+})();

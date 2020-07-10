@@ -45,8 +45,8 @@ export default class App extends React.Component {
 
   closePopup = () => {
     window.parent.postMessage({
-      'message': 'CLOSE_POPUP'
-    }, "*");
+      message: 'CLOSE_POPUP'
+    }, '*');
   };
 
   discountCodeURL = () => {
