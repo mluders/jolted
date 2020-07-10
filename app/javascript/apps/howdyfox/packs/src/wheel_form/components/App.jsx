@@ -13,8 +13,9 @@ export default function App() {
       const [status, data] = await getWheel();
 
       if (status == 200) {
-        const { wheel } = data;
-        store.wheel = wheel;
+        store.wheel = data['wheel'];
+        store.imageUploadUrl = data['image_upload_url'];
+        store.imageUploadUrlFields = data['image_upload_url_fields'];
       }
     }
 
@@ -43,7 +44,7 @@ export default function App() {
   }
 
   return useObserver(() => {
-    const { isSubmitting, wheel, changeWheel, changeSegment } = store;
+    const { isSubmitting, wheel, changeWheel, changeSegment, uploadImage } = store;
 
     return (
       <div>
@@ -56,6 +57,7 @@ export default function App() {
             wheel={wheel}
             changeWheel={changeWheel}
             changeSegment={changeSegment}
+            uploadImage={uploadImage}
             onSave={onSave}
           />
           }

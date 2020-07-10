@@ -5,14 +5,12 @@ class DiscountCodeService
   class << self
     def active_discount_code?(wheel:, email:)
       raw_discount = RawDiscountCode.find_by(wheel: wheel, email: email)
-      return false if raw_discount.blank?
-      return false if raw_discount.expired?
+      return true if raw_discount&.active?
   
       dynamic_discount = DiscountCode.find_by(wheel: wheel, email: email)
-      return false if dynamic_discount.blank?
-      return false if dynamic_discount.expired?
+      return true if dynamic_discount&.present?
 
-      true
+      false
     end
 
     def create_dynamic_discount_code(wheel_segment:, email:)

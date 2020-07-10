@@ -4,6 +4,14 @@
     background-color: <%= @wheel.popup_background_color %>;
   }
 
+  <% if @wheel.background_image_url.present? %>
+    #main-howdyfox-popup {
+      background-size: cover;
+      background-position: center;
+      background-image: url('<%= @wheel.background_image_url %>');
+    }
+  <% end %>
+
   .howdyfox-tab-link {
     z-index: 999996;
     position: fixed;

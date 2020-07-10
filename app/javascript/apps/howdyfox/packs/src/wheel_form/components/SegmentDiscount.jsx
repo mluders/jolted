@@ -6,10 +6,8 @@ const MAX_DISCOUNT_PERCENT = 90;
 
 export default function SegmentDiscount(props) {
   const { isSubmitting, segment, segmentIndex, useDynamicDiscountCodes, changeSegment } = props;
-  const {
-    discountPercent: discountPercentErrors,
-    rawDiscountCode: rawDiscountCodeErrors
-  } = segment.errors;
+  const discountPercentErrors = segment['errors']['discount_percent']
+  const rawDiscountCodeErrors = segment['errors']['raw_discount_code']
   const discountPercentError = (!isSubmitting && discountPercentErrors && discountPercentErrors.length > 0 ? discountPercentErrors[0] : null);
   const rawDiscountCodeError = (!isSubmitting && rawDiscountCodeErrors && rawDiscountCodeErrors.length > 0 ? rawDiscountCodeErrors[0] : null);
 
@@ -24,11 +22,11 @@ export default function SegmentDiscount(props) {
   }
   
   const handleDiscountPercentChange = (e) => {
-    changeSegment(segmentIndex, 'discountPercent', e.target.value);
+    changeSegment(segmentIndex, 'discount_percent', e.target.value);
   }
 
   const handleRawDiscountCodeChange = (e) => {
-    changeSegment(segmentIndex, 'rawDiscountCode', e.target.value);
+    changeSegment(segmentIndex, 'raw_discount_code', e.target.value);
   }
 
   return (
@@ -39,7 +37,7 @@ export default function SegmentDiscount(props) {
           <select
             style={{ minWidth: '100px' }}
             className={`form-select ${discountPercentError ? 'is-invalid' : ''}`}
-            value={segment.discountPercent || ''}
+            value={segment['discount_percent'] || ''}
             onChange={handleDiscountPercentChange}
           >
             {discountPercentOptions()}
@@ -55,7 +53,7 @@ export default function SegmentDiscount(props) {
             style={{ minWidth: '100px' }}
             className={`form-control ${rawDiscountCodeError ? 'is-invalid' : ''}`}
             onChange={handleRawDiscountCodeChange}
-            value={segment.rawDiscountCode || ''}
+            value={segment['raw_discount_code'] || ''}
           >
           </input>
           <InlineFormError message={rawDiscountCodeError} />

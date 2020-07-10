@@ -4,6 +4,7 @@ class WheelsController < AuthenticatedController
   end
 
   def edit
+    @post = S3_USER_UPLOAD_BUCKET.presigned_post(key: "#{SecureRandom.uuid}", success_action_status: '201', acl: 'public-read')
     @wheel = Wheel.find_by(shop: current_shop) || WheelService.new_wheel(shop: current_shop)
   end
 

@@ -62,12 +62,7 @@ export default class App extends React.Component {
   fetchWheelData = async () => {
     const url = this.wheelURL();
 
-    const response = await fetch(url, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Key-Inflection': 'camel'
-      }
-    });
+    const response = await fetch(url);
     const { wheel } = await response.json();
 
     this.setState({
@@ -77,14 +72,16 @@ export default class App extends React.Component {
   };
 
   fetchPrize = async (email) => {
-    const data = { email, isPreview: this.props.isPreview };
+    const data = {
+      'email': email,
+      'is_preview': this.props.isPreview
+    };
     const url = this.discountCodeURL();
 
     const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Key-Inflection': 'camel'
       },
       body: JSON.stringify(data)
     });
@@ -94,10 +91,10 @@ export default class App extends React.Component {
     switch (response.status) {
       case 201:
         const {
-          prizeLabel,
-          prizeDescription,
-          prizeValue,
-          segmentIndex
+          'prize_label': prizeLabel,
+          'prize_description': prizeDescription,
+          'prize_value': prizeValue,
+          'segment_index': segmentIndex
         } = body;
 
         this.setState({
@@ -215,9 +212,9 @@ export default class App extends React.Component {
             {
               wheelData &&
               <Wheel
-                wheelBaseColor={wheelData.wheelBaseColor}
-                colorizeWheel={wheelData.colorizeWheel}
-                segments={wheelData.segments}
+                wheelBaseColor={wheelData['wheel_base_color']}
+                colorizeWheel={wheelData['colorize_wheel']}
+                segments={wheelData['segments']}
                 onCreateWheel={this.onCreateWheel}
                 afterSpinWheel={this.afterSpinWheel}
               />

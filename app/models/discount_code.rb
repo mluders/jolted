@@ -7,7 +7,7 @@ class DiscountCode < ApplicationRecord
   validates :shopify_price_rule_id, presence: true
   validates :shopify_discount_code_id, presence: true
 
-  def expired?
-    self.expires_at < DateTime.now.utc
+  def active?
+    self.expires_at >= DateTime.now.utc
   end
 end
