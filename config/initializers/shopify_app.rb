@@ -1,5 +1,3 @@
-HOST_URL = Rails.application.config.host_url
-
 ShopifyApp.configure do |config|
   config.application_name = 'HowdyFox'
   config.api_key = ENV.fetch('SHOPIFY_API_KEY')
@@ -14,8 +12,9 @@ ShopifyApp.configure do |config|
   config.api_version = '2020-04'
   config.shop_session_repository = 'Shop'
 
+  host_url = Rails.application.config.host_url
   config.webhooks = [
-    { topic: 'app/uninstalled', address: "#{HOST_URL}/webhooks/app_uninstalled" }
+    { topic: 'app/uninstalled', address: "#{host_url}/webhooks/app_uninstalled" }
   ]
 end
 
