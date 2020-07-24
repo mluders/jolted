@@ -1,6 +1,6 @@
 Rails.application.configure do
   config.hosts = (config.hosts rescue []) << /\h+.ngrok.io/
-  config.hosts << 'howdyfox.ngrok.io'
+  config.hosts << 'jolted.ngrok.io'
   config.hosts << 'the-ninja-outlet.myshopify.com'
 
   # Settings specified here will take precedence over those in config/application.rb.
@@ -64,5 +64,5 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.host_url = 'https://howdyfox.ngrok.io'
+  config.host_url = 'https://jolted.ngrok.io'
 end

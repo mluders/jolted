@@ -51,12 +51,12 @@ export default class App extends React.Component {
 
   discountCodeURL = () => {
     const { shopId } = this.props;
-    return `/apps/howdyfox/shops/${shopId}/discount_codes`
+    return `/apps/jolted/shops/${shopId}/discount_codes`
   };
 
   wheelURL = () => {
     const { shopId } = this.props;
-    return `/apps/howdyfox/shops/${shopId}/wheel`
+    return `/apps/jolted/shops/${shopId}/wheel`
   };
 
   fetchWheelData = async () => {

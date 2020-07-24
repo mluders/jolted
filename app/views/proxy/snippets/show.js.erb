@@ -2,34 +2,34 @@
   console.log('Loaded snippet');
 
   function openPopup() {
-    document.getElementById('main-howdyfox-popup').classList.add('open');
-    document.getElementById('howdyfox-popup-background').classList.add('open');
+    document.getElementById('main-jolted-popup').classList.add('open');
+    document.getElementById('jolted-popup-background').classList.add('open');
 
     document.body.style.overflow = 'hidden';
   }
 
   function closePopup() {
-    document.getElementById('main-howdyfox-popup').classList.remove('open');
-    document.getElementById('howdyfox-popup-background').classList.remove('open');
+    document.getElementById('main-jolted-popup').classList.remove('open');
+    document.getElementById('jolted-popup-background').classList.remove('open');
     document.body.style.overflow = 'visible';
-    document.getElementById('howdyfox-popup-tab').style.display = 'none';
+    document.getElementById('jolted-popup-tab').style.display = 'none';
   }
 
   function checkPreviewMode() {
     const urlParams = new URLSearchParams(window.location.search);
-    const isPreview = urlParams.get('howdyfox_preview') === 'true';
+    const isPreview = urlParams.get('jolted_preview') === 'true';
     return isPreview;
   }
 
   if (window.addEventListener) {
-    window.addEventListener("message", onHowdyFoxMessage, false);
+    window.addEventListener("message", onJoltedMessage, false);
   }
 
   else if (window.attachEvent) {
-    window.attachEvent("onmessage", onHowdyFoxMessage, false);
+    window.attachEvent("onmessage", onJoltedMessage, false);
   }
 
-  function onHowdyFoxMessage(event) {
+  function onJoltedMessage(event) {
     if (event.data.message === 'OPEN_POPUP') {
       openPopup();
     }
@@ -45,6 +45,6 @@
 
   const popup = document.createElement('div');
   popup.innerHTML = `<%= render 'popup' %>`;
-  popup.innerHTML = popup.innerHTML.replace('howdyfox_preview=false', `howdyfox_preview=${preview}`);
+  popup.innerHTML = popup.innerHTML.replace('jolted_preview=false', `jolted_preview=${preview}`);
   document.body.insertBefore(popup, document.body.firstChild);
 })();

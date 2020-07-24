@@ -1,5 +1,5 @@
 ShopifyApp.configure do |config|
-  config.application_name = 'HowdyFox'
+  config.application_name = 'Jolted'
   config.api_key = ENV.fetch('SHOPIFY_API_KEY')
   config.secret = ENV.fetch('SHOPIFY_SECRET')
   config.old_secret = ''

@@ -36,7 +36,7 @@ export default function App() {
       scrollToClass('is-invalid');
     } else {
       store.isSubmitting = false;
-      store.generalError = "Something went wrong when creating your wheel. Please contact support@howdyfox.com";
+      store.generalError = "Something went wrong when creating your wheel. Please contact support@jolted.io";
       scrollToClass('general-error');
     }
   }
