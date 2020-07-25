@@ -2,6 +2,7 @@
   <%= render 'wheels/preview', locals: { wheel: @wheel } %>
 <% else %>
   <div class="jumbotron text-center">
+    <%= image_tag 'purple_iphone.png', class: 'img-fluid mb-3', width: 300 %>
     <h2 class="mb-4">Add a prize wheel to your Shopify store.</h2>
     <p class="lead">
       <%= link_to 'Create Wheel', edit_wheel_path, class: 'btn btn-lg btn-primary' %>
