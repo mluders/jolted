@@ -17,3 +17,5 @@
 // const imagePath = (name) => images(name, true)
 
 // require("shopify_app")
+
+import '../css/application';
