@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ImageUploader from 'react-images-upload';
+import ImageUploader from '../../shared/components/ImageUploader';
 import Spinner from './Spinner';
 
 const imageStyle = {
