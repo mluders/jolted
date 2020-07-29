@@ -18,4 +18,6 @@ Rails.application.routes.draw do
       resources :discount_codes, only: [:create]
     end
   end
+
+  get '/privacy', to: 'legal#privacy', as: :privacy
 end
