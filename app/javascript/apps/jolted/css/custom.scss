@@ -1,6 +1,16 @@
+footer {
+  background-color: rgba(0,0,0,.05);
+  font-size: .875em;
+  color: #6c757d !important;
+}
+
+footer a {
+  color: #6c757d !important;
+}
+
 .table-striped-even tr:nth-child(even) {
   background: rgba(0,0,0,.03)
- }
+}
 
 .btn-primary,
 .btn-primary:active,
