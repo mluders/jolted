@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { adjustColor } from '../color_utils';
+import { adjustColor } from '../util/color_helpers';
 
 export default class SimpleWheel extends React.Component {
   DEFAULT_SEGMENT_COLORS = [

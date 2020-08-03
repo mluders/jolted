@@ -1,6 +1,17 @@
 (() => {
   console.log('Loaded snippet');
 
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  function isPopupComplete() {
+    const completed = getCookie('jolted_popup_complete');
+    return (completed == 1);
+  }
+
   function openPopup() {
     document.getElementById('main-jolted-popup').classList.add('open');
     document.getElementById('jolted-popup-background').classList.add('open');
@@ -41,7 +52,10 @@
 
   const live = <%= @wheel.live? %>;
   const preview = checkPreviewMode();
+
+  console.log('Popup completed: ', isPopupComplete());
   if (!live && !preview) return;
+  if (live && isPopupComplete()) return;
 
   const popup = document.createElement('div');
   popup.innerHTML = `<%= render 'popup' %>`;

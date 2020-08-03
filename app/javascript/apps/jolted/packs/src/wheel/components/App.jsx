@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
+import { setPopupComplete } from '../../shared/util/popup_cookie';
 import Form from './Form';
 import Prize from './Prize';
 import Spinner from './Spinner';
@@ -157,10 +158,13 @@ export default class App extends React.Component {
   };
 
   afterSpinWheel = () => {
+    // Temporarily prevent the pop-up from displaying
+    if (!this.props.isPreview) setPopupComplete();
+
     this.setState({
       ...this.state,
       wheelHasSpun: true
-    })
+    });
   };
 
   currentFormComponent = () => {
