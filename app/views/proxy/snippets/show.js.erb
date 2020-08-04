@@ -54,8 +54,8 @@
   const preview = checkPreviewMode();
 
   console.log('Popup completed: ', isPopupComplete());
-  if (!live && !preview) return;
-  if (live && isPopupComplete()) return;
+  if (!preview && !live) return;
+  if (!preview && live && isPopupComplete()) return;
 
   const popup = document.createElement('div');
   popup.innerHTML = `<%= render 'popup' %>`;
