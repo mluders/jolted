@@ -8,13 +8,11 @@ ShopifyApp.configure do |config|
   config.scope = 'read_script_tags, write_script_tags, read_price_rules, write_price_rules, read_discounts, write_discounts'
 
   config.embedded_app = false
-  config.after_authenticate_job = false
   config.api_version = '2020-04'
   config.shop_session_repository = 'Shop'
-
-  host_url = Rails.application.config.host_url
+  config.after_authenticate_job = { job: AfterAuthenticateJob, inline: false }
   config.webhooks = [
-    { topic: 'app/uninstalled', address: "#{host_url}/webhooks/app_uninstalled" }
+    { topic: 'app/uninstalled', address: "#{Rails.application.config.host_url}/webhooks/app_uninstalled" }
   ]
 end
 
