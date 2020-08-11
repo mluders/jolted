@@ -48,10 +48,3 @@ TEST CASES
 2. On the home screen, in the top-right corner of the wheel thumbnail, click Options => Delete Wheel.
 3. Open a new incognito window, and navigate to your storefront.
 4. Ensure that the pop-up is gone.
-
-
----Uninstall the app---
-1. In the Shopify Admin, uninstall the Spin Wheel app.
-2. Wait 30 seconds for the Uninstall Webhook to be sent.
-3. Open https://www.jolted.io
-4. Your account should be deactivated, and you should be redirected to the installation page.
