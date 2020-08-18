@@ -11,6 +11,7 @@ ShopifyApp.configure do |config|
   config.api_version = '2020-04'
   config.shop_session_repository = 'Shop'
   config.after_authenticate_job = { job: AfterAuthenticateJob, inline: false }
+  config.enable_same_site_none = Rails.env.production?
   config.webhooks = [
     { topic: 'app/uninstalled', address: "#{Rails.application.config.host_url}/webhooks/app_uninstalled" }
   ]
