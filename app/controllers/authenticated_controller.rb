@@ -3,4 +3,5 @@
 class AuthenticatedController < ApplicationController
   include ShopifyApp::Authenticated
   include AuthHelpers
+  include BillingHelpers
 end
