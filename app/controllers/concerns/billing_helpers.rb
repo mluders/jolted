@@ -19,7 +19,7 @@ module BillingHelpers
     if pending_charge.blank? || pending_charge.price != subscription_price
       pending_charge = ShopifyAPI::RecurringApplicationCharge.new
       pending_charge.name       = 'Jolted Subscription'
-      pending_charge.test       = !Rails.env.production?
+      pending_charge.test       = true # TODO: !Rails.env.production?
       pending_charge.price      = subscription_price # TODO: Set up billing info in config
       pending_charge.return_url = Rails.application.routes.url_helpers.root_url(host: Rails.application.config.host_url)
       pending_charge.save
