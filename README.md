@@ -1,7 +1,16 @@
 # Jolted
 Our pop-ups our hot 🔥
 
-TEST CASES
+## TODO
+* Unit tests
+* Applying coupon at checkout
+* Request a feature
+* Rollbar and monitoring
+* Style improvements
+* Upgrade database
+* Start planning for more games
+
+## TEST CASES
 
 ---Create a simple wheel---
 1. Open the Spin Wheel app
