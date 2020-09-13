@@ -32,7 +32,7 @@ class Wheel < ApplicationRecord
   private
 
   def min_segments
-    errors.add(:wheel_segments, "must exist (at least #{MIN_SEGMENTS}") if wheel_segments.size < MIN_SEGMENTS
+    errors.add(:wheel_segments, "must exist (at least #{MIN_SEGMENTS})") if wheel_segments.size < MIN_SEGMENTS
   end
 
   def discount_duration_exists

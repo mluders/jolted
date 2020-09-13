@@ -6,8 +6,6 @@ class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)
 
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :all
-
-  # Add more helper methods to be used by all tests here...
+  # Load exemplars
+  Dir[File.expand_path "test/exemplars/**/*.rb"].each{ |f| require_relative(f) }
 end

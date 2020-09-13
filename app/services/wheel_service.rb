@@ -26,12 +26,14 @@ class WheelService
       wheel
     end
 
+    private
+
     def winning_index?(i)
       i.even?
     end
 
     def default_label(i)
-      winning_index?(i) ? nil : LOSING_LABELS[i / 2 % LOSING_LABELS.size]
+      winning_index?(i) ? nil : LOSING_LABELS[(i / 2) % LOSING_LABELS.size]
     end
   end
 end
